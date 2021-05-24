@@ -1,0 +1,16 @@
+
+i	java:S1003"NRename this method name to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(âÏš#8Ğ„›˜/
+r	java:S117"QRename this local variable to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(¯½¸Šøÿÿÿÿ8¤û¼û—/
+v	java:S116
+"URename this field "country_id" to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(†Ê½óùÿÿÿÿ8îæ›˜/
+j	java:S100"NRename this method name to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(ìşæ8¤û¼û—/
+j	java:S100"NRename this method name to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(Íèû8¤û¼û—/
+F
+java:S1128"$Remove this unused import 'db.Role'.(ç×Ÿşÿÿÿÿ8ûÜ¿û—/
+l	java:S1173"QRename this local variable to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(âÏš#8Ğ„›˜/
+q	java:S116"URename this field "first_name" to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(è•Ûì8îû·û—/
+o	java:S100"NRename this method name to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(¯½¸Šøÿÿÿÿ8¤û¼û—/
+o	java:S100"NRename this method name to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(µ¤Üºúÿÿÿÿ8¤û¼û—/
+o	java:S100/"NRename this method name to match the regular expression '^[a-z][a-zA-Z0-9]*$'.( ”‚Âøÿÿÿÿ8Ğ„›˜/
+r	java:S116"VRename this field "second_name" to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(óÓîí8îû·û—/
+m	java:S117"QRename this local variable to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(Íèû8¤û¼û—/

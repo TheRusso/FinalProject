@@ -1,0 +1,16 @@
+
+{	java:S115"ZRename this constant name to match the regular expression '^[A-Z][A-Z0-9]*(_[A-Z0-9]+)*$'.(Ÿ¡¼µûÿÿÿÿ8ÛýÆñ˜/
+i
+java:S2095X"GUse try-with-resources or close this "Statement" in a "finally" clause.(‡²€·ýÿÿÿÿ8ºèÈþ—/
+d
+java:S1068"GRemove this unused "SQL__FIND_ALL_ORDERED_ITEMS_BY_USER" private field.(À¢ù¦8æÓ­þ—/
+P
+java:S14818".Remove this unused "resultSet" local variable.(›÷Œœúÿÿÿÿ8¹§ÿï˜/
+{	java:S115"ZRename this constant name to match the regular expression '^[A-Z][A-Z0-9]*(_[A-Z0-9]+)*$'.(¨ìÂÏþÿÿÿÿ8‹­Ôý—/
+l
+java:S2095<"OUse try-with-resources or close this "PreparedStatement" in a "finally" clause.(¡ˆÕÛ8¹§ÿï˜/
+i
+java:S2095*"GUse try-with-resources or close this "Statement" in a "finally" clause.(‡²€·ýÿÿÿÿ8áêÎñ˜/
+{	java:S115"ZRename this constant name to match the regular expression '^[A-Z][A-Z0-9]*(_[A-Z0-9]+)*$'.(ø—¨þÿÿÿÿ8¾«öï˜/
+v	java:S115"ZRename this constant name to match the regular expression '^[A-Z][A-Z0-9]*(_[A-Z0-9]+)*$'.(À¢ù¦8‹­Ôý—/
+Z	java:S106@"9Replace this use of System.out or System.err by a logger.(µâ£äþÿÿÿÿ8Ï§¹ñ˜/

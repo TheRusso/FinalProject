@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <title>Bootstrap Example</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.0/css/bootstrap.min.css">
+  <link rel="stylesheet" href="css/style2.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.0/umd/popper.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.0/js/bootstrap.min.js"></script>
+</head>
+<body>
+    
+<!--  *********************************  head  ********************************-->
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-sm-12 col-lg-2">
+                <a href="base.html"><div id="logo_img" class="mx-auto"></div></a>
+            </div>
+            <div class="col-sm-12 col-lg-10">
+                <nav class="navbar navbar-expand-lg navbar-dark  justify-content-center">
+                     <button class="navbar-toggler but_tog" type="button" data-toggle="collapse" data-target="#collapsibleNavbar">
+                        <span class="navbar-toggler-icon"></span>
+                     </button>
+                    <div class="collapse navbar-collapse d-lg-flex flex-row-reverse" id="collapsibleNavbar">
+                        <ul class="navbar-nav text_nav">
+                            <li class="nav-item"><a href="media.html" class="nav-link">Медiа</a></li>
+                            <li class="nav-item"><a href="contacts.html" class="nav-link">Контакти</a></li>
+                            <li class="nav-item"><a href="shop.html" class="nav-link">Магазин</a></li>
+                            <li class="nav-item"><a href="about_us.html" class="nav-link">Про нас</a></li>
+                            <li class="nav-item"><a href="press_kit2.html" class="nav-link">Прес-кiт</a></li>
+                        </ul>
+                    </div>
+                </nav>
+            </div>
+        </div>
+    </div>
+    
+    
+<!--  *********************************  head  ********************************-->
+
+<!--  *********************************  content  ********************************-->
+
+    <div class="container">
+       <div class="container">
+            <img src="{% static 'images/separate_line.png' %}" alt="" class="img-fluid d-block mx-auto">
+            <h1 class="display-2 text-center brusnika">Товари</h1>
+        </div>
+
+        <div class="row d-flex justify-content-around">
+
+                <div class="card col-xl-3 col-lg-5 col-md-8 col-sm-9 m-10-20">
+                        <a href="{% url 'item' i.id %}">
+                            <img class="card-img-top" src="img/as31.jpg" alt="Card image">
+                        </a>
+                    <div class="card-body">
+                        <a href="{% url 'item' i.id %}">
+                           <div class="info_product_card">
+                                <h4 class="card-title text-dark">T-Shirt</h4>
+                                <p class="card-text text-dark">Чудова футболка</p>
+                            </div>
+                        </a>
+                        <div class="d-flex justify-content-between">
+                            <p class="price text-dark">300 грн</p>
+                            <a href="#" class="btn btn-primary">Купити</a>
+                        </div>
+                    </div>
+                </div>
+                
+               <div class="card col-xl-3 col-lg-5 col-md-8 col-sm-9 m-10-20">
+                        <a href="{% url 'item' i.id %}">
+                            <img class="card-img-top" src="img/as31.jpg" alt="Card image">
+                        </a>
+                    <div class="card-body">
+                        <a href="{% url 'item' i.id %}">
+                           <div class="info_product_card">
+                                <h4 class="card-title text-dark">T-Shirt</h4>
+                                <p class="card-text text-dark">Чудова футболка</p>
+                            </div>
+                        </a>
+                        <div class="d-flex justify-content-between">
+                            <p class="price text-dark">300 грн</p>
+                            <a href="#" class="btn btn-primary">Купити</a>
+                        </div>
+                    </div>
+                </div>
+        
+        
+    </div>
+    
+    <div class="d-flex justify-content-center mt-50">
+            <ul class="pagination custom-pagination">
+                <li class="page-item"><a class="page-link" href="#">Previous</a></li>
+                <li class="page-item active"><a class="page-link" href="#">1</a></li>
+                <li class="page-item"><a class="page-link" href="#">2</a></li>
+                <li class="page-item"><a class="page-link" href="#">3</a></li>
+                <li class="page-item"><a class="page-link" href="#">Next</a></li>
+            </ul>
+    </div>
+</div>
+    
+<!--  *********************************  content  ********************************-->
+
+
+<!--  *********************************  footer  ********************************-->
+
+    <div id="footer" class="container block">
+       <div class="container">
+            <img src="img/separate_line.png" alt="" class="img-fluid d-block mx-auto">
+            <h2 class="text-center brusnika">Підпишись на нас</h2>
+        </div>
+        <div class="d-flex justify-content-center">
+            <div style="width: 200px;" class="d-flex justify-content-around">
+                <a href="https://www.instagram.com/motankaband/" target="_blank"><img src="img/instagram_bw.png" height="25px" alt=""></a>
+                <a href="https://www.facebook.com/motankaband/" target="_blank"><img src="img/facebook_bw.png" height="25px" alt=""></a>
+                <a href="https://www.youtube.com/channel/UCngZgkmplUObMlkc1dOPXCQ" target="_blank"><img src="img/youtube_bw.png" height="25px" alt=""></a>
+                <a href=""><img src="img/spotify_bw.png" height="25px" alt=""></a>
+            </div>
+        </div>
+        <p class="text-center" style="margin: 20px 0 0 0;">
+            2020 Directed by The Russo
+        </p>
+    </div>
+    
+<!--  *********************************  footer  ********************************-->
+
+</body>
+</html>

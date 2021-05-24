@@ -1,0 +1,17 @@
+
+l
+java:S2095("OUse try-with-resources or close this "PreparedStatement" in a "finally" clause.(Ü­®á8³í§˜/
+Z	java:S106*"9Replace this use of System.out or System.err by a logger.(Æ’ôˆüÿÿÿÿ8ÿ¹Ä˜/
+v	java:S115"ZRename this constant name to match the regular expression '^[A-Z][A-Z0-9]*(_[A-Z0-9]+)*$'.(ßçĞ²8— ™§˜/
+U
+java:S1068"3Remove this unused "SQL__CHECK_USER" private field.(„‚ÿşÿÿÿÿ8’ãš§˜/
+v	java:S115"ZRename this constant name to match the regular expression '^[A-Z][A-Z0-9]*(_[A-Z0-9]+)*$'.(Ÿ˜Û‘8ƒÍíš˜/
+l
+java:S2095o"OUse try-with-resources or close this "PreparedStatement" in a "finally" clause.(œÜŠı8Á”å›˜/
+k
+java:S2095R"OUse try-with-resources or close this "PreparedStatement" in a "finally" clause.(‘Ÿó8®ë™›˜/
+{	java:S115"ZRename this constant name to match the regular expression '^[A-Z][A-Z0-9]*(_[A-Z0-9]+)*$'.(„‚ÿşÿÿÿÿ8õãá¤˜/
+v	java:S115"ZRename this constant name to match the regular expression '^[A-Z][A-Z0-9]*(_[A-Z0-9]+)*$'.(Í ¾è8ƒÍíš˜/
+m
+java:S2095œ"OUse try-with-resources or close this "PreparedStatement" in a "finally" clause.(²­Ëì8×çâ›˜/
+{	java:S115"ZRename this constant name to match the regular expression '^[A-Z][A-Z0-9]*(_[A-Z0-9]+)*$'.(±•£şÿÿÿÿ8ƒÍíš˜/
