@@ -55,24 +55,24 @@
         <ul class="pagination custom-pagination">
             <c:choose>
                 <c:when test="${currentPage > 1}">
-                    <li class="page-item"><a class="page-link" href="project?command=shop_page&page=${currentPage - 1}">Previous</a></li>
+                    <li class="page-item"><a class="page-link" href="?page=${currentPage - 1}">Previous</a></li>
                 </c:when>
             </c:choose>
 
             <c:forEach begin="1" end="${countOfPages}" var="i">
                 <c:choose>
                     <c:when test="${i == currentPage}">
-                        <li class="page-item active"><a class="page-link" href="project?command=shop_page&page=${i}">${i}</a></li>
+                        <li class="page-item active"><a class="page-link" href="?page=${i}">${i}</a></li>
                     </c:when>
                     <c:otherwise>
-                        <li class="page-item"><a class="page-link" href="project?command=shop_page&page=${i}">${i}</a></li>
+                        <li class="page-item"><a class="page-link" href="?page=${i}">${i}</a></li>
                     </c:otherwise>
                 </c:choose>
             </c:forEach>
 
             <c:choose>
                 <c:when test="${currentPage < countOfPages}">
-                    <li class="page-item"><a class="page-link" href="project?command=shop_page&page=${currentPage + 1}">Next</a></li>
+                    <li class="page-item"><a class="page-link" href="?page=${currentPage + 1}">Next</a></li>
                 </c:when>
             </c:choose>
 

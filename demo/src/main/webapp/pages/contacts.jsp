@@ -18,7 +18,7 @@
         <h1 class="display-2 text-center brusnika"><fmt:message key="contacts.contacts" /> </h1>
     </div>
 
-    <form action="project">
+    <form action="view" method="post">
         <input type="hidden" name="command" value="send_message_contacts">
         <div class="form-group">
             <label for="name"><fmt:message key="contacts.name" /></label>

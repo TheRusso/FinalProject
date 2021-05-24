@@ -16,7 +16,7 @@ public abstract class Command {
      * Execution method for command.
      * @return Address to go once the command is executed.
      */
-    public abstract String execute(HttpServletRequest request, HttpServletResponse response);
+    public abstract ServletResponse execute(HttpServletRequest request, HttpServletResponse response);
 
     @Override
     public String toString() {

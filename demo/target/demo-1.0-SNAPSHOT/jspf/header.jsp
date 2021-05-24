@@ -24,50 +24,34 @@
                 <div class="collapse navbar-collapse d-lg-flex flex-row-reverse" id="collapsibleNavbar">
                     <ul class="navbar-nav text_nav">
                         <li class="nav-item">
-                            <form action="project">
-                                <input type="hidden" name="command" value="media_page">
-                                <input type="submit" class="text_from_input" value="<fmt:message key="header.media" /> ">
-                            </form>
+                            <a href="${pageContext.request.contextPath}/view/media"><fmt:message key="header.media" /></a>
+<%--                            <form action="view" method="post">--%>
+<%--                                <input type="hidden" name="command" value="media_page">--%>
+<%--                                <input type="submit" class="text_from_input" value="<fmt:message key="header.media" /> ">--%>
+<%--                            </form>--%>
                         </li>
                         <li class="nav-item">
-                            <form action="project">
-                                <input type="hidden" name="command" value="contacts_page">
-                                <input type="submit" class="text_from_input" value="<fmt:message key="header.contacts" /> ">
-                            </form>
+                            <a href="${pageContext.request.contextPath}/view/contacts"><fmt:message key="header.contacts" /></a>
+
                         </li>
                         <li class="nav-item">
-                            <form action="project">
-                                <input type="hidden" name="command" value="shop_page">
-                                <input type="submit" class="text_from_input" value="<fmt:message key="header.shop" /> ">
-                            </form>
+                            <a href="${pageContext.request.contextPath}/view/shop"><fmt:message key="header.shop" /></a>
                         </li>
                         <li class="nav-item">
-                            <form action="project">
-                                <input type="hidden" name="command" value="aboutUs_page">
-                                <input type="submit" class="text_from_input" value="<fmt:message key="header.aboutUs" /> ">
-                            </form>
+                            <a href="${pageContext.request.contextPath}/view/about_us"><fmt:message key="header.aboutUs" /></a>
                         </li>
                         <li class="nav-item">
-                            <form action="project">
-                                <input type="hidden" name="command" value="press_page">
-                                <input type="submit" class="text_from_input" value="<fmt:message key="header.press" /> ">
-                            </form>
+                            <a href="${pageContext.request.contextPath}/view/press_list"><fmt:message key="header.press" /></a>
                         </li>
 
                         <c:if test="${empty sessionScope.user}">
                             <li class="nav-item">
-                                <form action="project">
-                                    <input type="hidden" name="command" value="enter">
-                                    <input type="submit" class="text_from_input" value="<fmt:message key="header.login" /> ">
-                                </form>
+                                <a href="${pageContext.request.contextPath}/view/login"><fmt:message key="header.login" /></a>
                             </li>
                         </c:if>
                         <c:if test="${not empty sessionScope.user}">
                             <li class="nav-item">
-                                <form action="project">
-                                    <input type="hidden" name="command" value="logout">
-                                    <input type="submit" class="text_from_input" value="<fmt:message key="header.logout" /> ">
-                                </form>
+                                <a href="${pageContext.request.contextPath}/view/logout"><fmt:message key="header.logout" /></a>
                             </li>
                         </c:if>
 

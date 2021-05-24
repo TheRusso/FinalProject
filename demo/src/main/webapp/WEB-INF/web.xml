@@ -34,16 +34,15 @@
     </servlet>
     <servlet-mapping>
         <servlet-name>Controller</servlet-name>
-        <url-pattern>/project/*</url-pattern>
+        <url-pattern>/view/*</url-pattern>
     </servlet-mapping>
 
     <error-page>
         <error-code>404</error-code>
-        <location>/pages/error_page.jsp</location>
+        <location>/pages/404.jsp</location>
     </error-page>
 
     <error-page>
-        <error-code>405</error-code>
         <location>/pages/error_page.jsp</location>
     </error-page>
 

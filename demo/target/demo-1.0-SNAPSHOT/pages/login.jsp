@@ -22,8 +22,8 @@
                 </div>
             </div>
             <div class="info-form">
-                <form action="project" method="post" class="justify-content-center">
-                    <input type="hidden" name="command" value="login">
+                <form action="view" method="post" class="justify-content-center">
+                    <input type="hidden" name="command" value="enter">
                     <div class="form-group">
                         <label for="exampleInputEmail1">Email address</label>
                         <input type="email" name="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter email" required>
@@ -48,13 +48,13 @@
 
                 <div class="container div-wrapper" style="margin-top: 20px">
                     <div class="row">
-                        <div class="col-sm-3"></div>
-                        <div class="col-sm-7">
-                            <form action="project">
-                                <input type="hidden" name="command" value="register_page">
-                                <label for="register">If you are new user</label>
-                                <input class="text_from_input" id="register" type="submit" value="Register"  style="margin-top: 10px;text-decoration: underline;">
-                            </form>
+                        <div class="col-sm-1"></div>
+                        <div class="col-sm-11">
+<%--                            <form action="view/register" method="get">--%>
+<%--                                <label for="register"></label>--%>
+<%--                                <input class="text_from_input" id="register" type="submit" value="<fmt:message key="register.register"/>"  style="margin-top: 10px;text-decoration: underline;">--%>
+<%--                            </form>--%>
+                            <fmt:message key="register.newUser"/> <a href="${pageContext.request.contextPath}/view/register" style="margin-left: 10px;color: white;text-decoration: underline;"><fmt:message key="register.register"/> </a>
                         </div>
                     </div>
                 </div>

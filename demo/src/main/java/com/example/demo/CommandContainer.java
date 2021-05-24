@@ -10,21 +10,19 @@ public class CommandContainer {
     private static Map<String, Command> commands = new TreeMap<String, Command>();
 
     static {
-        commands.put("login", new LoginCommand());
-        commands.put("register", new RegisterUserCommand());
-        commands.put("catalog_page", new CatalogCommand());
+        commands.put("enter", new LoginCommand());
+        commands.put("login", new OpenLoginPageCommand());
         commands.put("logout", new LogoutCommand());
-        commands.put("send_message_contacts", new SendMessageCommand());
+
+        commands.put("media", new OpenMediaCommand());
+        commands.put("contacts", new OpenContactsPageCommand());
+        commands.put("shop", new OpenShopPageCommand());
+        commands.put("about_us", new OpenAboutUsPage());
+        commands.put("press_list", new OpenPressPageCommand());
+        commands.put("register", new OpenRegisterPage());
+        commands.put("insert_user", new RegisterUserCommand());
         commands.put("change_lang", new ChangeLangCommand());
-
-        commands.put("enter", new OpenLoginPageCommand());
-        commands.put("register_page", new OpenRegisterPage());
-        commands.put("contacts_page", new OpenContactsPageCommand());
-        commands.put("shop_page", new OpenShopPageCommand());
-        commands.put("media_page", new ShowMediaCommand());
-        commands.put("aboutUs_page", new OpenAboutUsPage());
-        commands.put("press_page", new OpenPressPageCommand());
-
+        commands.put("send_message_contacts", new SendMessageCommand());
     }
 
     public static Command get(String commandName){

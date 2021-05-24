@@ -8,12 +8,17 @@ import javax.servlet.http.HttpSession;
 public class LogoutCommand extends Command{
 
     @Override
-    public String execute(HttpServletRequest request, HttpServletResponse response) {
+    public ServletResponse execute(HttpServletRequest request, HttpServletResponse response) {
+        ServletResponse servletResponse = new ServletResponse(Path.NOT_FOUND.value);
 
-        HttpSession session = request.getSession(false);
-        if (session != null)
+        HttpSession session = request.getSession();
+        if(session.getAttribute("user") != null){
             session.invalidate();
 
-        return Path.MAIN_PAGE.value;
+            servletResponse.setPath(Path.MAIN_PAGE.value);
+            servletResponse.setRedirectType(RedirectType.REDIRECT);
+        }
+
+        return servletResponse;
     }
 }

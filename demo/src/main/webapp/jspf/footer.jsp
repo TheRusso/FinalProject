@@ -1,4 +1,4 @@
-<div id="footer" class="container block">
+<div id="footer" class="container block" style="margin-bottom: 30px">
     <div class="container">
         <img src="<c:url value="/pages/motanka/img/separate_line.png" /> " alt="" class="img-fluid d-block mx-auto">
         <h2 class="text-center brusnika"><fmt:message key="footer.followUs" /></h2>
@@ -15,19 +15,19 @@
         2020 Directed by The Russo
     </p>
 
-    <ul>
+    <ul style="position: absolute; bottom: -260px; left: 100px">
         <li>
-            <form action="project">
+            <form action="view" method="post">
                 <input type="hidden" name="command" value="change_lang">
                 <input type="hidden" name="lang" value="ru">
-                <input type="submit" name="button" value="ru" class="text_from_input">
+                <input type="submit" value="ru" class="text_from_input">
             </form>
         </li>
         <li>
-            <form action="project">
+            <form action="view" method="post">
                 <input type="hidden" name="command" value="change_lang">
                 <input type="hidden" name="lang" value="en">
-                <input type="submit" name="button" value="en" class="text_from_input">
+                <input type="submit" value="en" class="text_from_input">
             </form>
         </li>
     </ul>

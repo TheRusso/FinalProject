@@ -1,17 +1,17 @@
-<%--
-  Created by IntelliJ IDEA.
-  User: rusla
-  Date: 18.05.2021
-  Time: 9:48
-  To change this template use File | Settings | File Templates.
---%>
-<%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ page pageEncoding="UTF-8"%>
+<%@ include file="/jspf/page.jsp" %>
+<%@ include file="/jspf/taglib.jsp"%>
+
 <html>
-<head>
-    <title>Error</title>
-</head>
+
+<c:set var="title" value="404" scope="page"/>
+<%@ include file="/jspf/head_page.jsp"%>
+
 <body>
-    <h1>Error</h1>
-    <p style="color: #ff0000">${errorMessage}</p>
+
+<h1 style="color: red">Error</h1>
+<p>${errorMessage}</p>
+
 </body>
+
 </html>

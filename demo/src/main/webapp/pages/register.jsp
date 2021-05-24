@@ -22,8 +22,8 @@
                 </div>
             </div>
             <div class="info-form">
-                <form action="project" class="justify-content-center">
-                    <input type="hidden" name="command" value="register">
+                <form action="view" class="justify-content-center" method="post">
+                    <input type="hidden" name="command" value="insert_user">
                     <div class="form-group">
                         <label for="exampleInputEmail1"><fmt:message key="register.email" /> </label>
                         <input type="email" name="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="<fmt:message key="register.enter_email" /> " required>
