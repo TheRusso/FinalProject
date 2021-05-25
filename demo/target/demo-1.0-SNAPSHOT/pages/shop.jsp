@@ -14,18 +14,18 @@
 <div class="container">
     <div class="container">
         <img src="{% static 'images/separate_line.png' %}" alt="" class="img-fluid d-block mx-auto">
-        <h1 class="display-2 text-center brusnika">Товари</h1>
+        <h1 class="display-2 text-center brusnika"><fmt:message key="shop.goods"/></h1>
     </div>
 
     <div class="row d-flex justify-content-around">
 
         <c:forEach var="item" items="${itemsList}">
             <div class="card col-xl-3 col-lg-5 col-md-8 col-sm-9 m-10-20">
-                <a href="{% url 'item' i.id %}">
+                <a href="${pageContext.request.contextPath}/view/item?item_id=${item.id}">
                     <img class="card-img-top" src="<c:url value="${item.img}" /> " alt="Card image">
                 </a>
                 <div class="card-body">
-                    <a href="{% url 'item' i.id %}">
+                    <a href="${pageContext.request.contextPath}/view/item?item_id=${item.id}">
                         <div class="info_product_card">
                             <h4 class="card-title text-dark">${item.title}</h4>
                             <p class="card-text text-dark">
@@ -40,7 +40,7 @@
                     </a>
                     <div class="d-flex justify-content-between">
                         <p class="price text-dark">${item.price}грн</p>
-                        <a href="#" class="btn btn-primary">Купити</a>
+                        <a href="${pageContext.request.contextPath}/view/item?item_id=${item.id}" class="btn btn-primary"><fmt:message key="shop.buy"/></a>
                     </div>
                 </div>
             </div>

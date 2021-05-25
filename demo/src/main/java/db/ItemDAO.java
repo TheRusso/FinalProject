@@ -27,6 +27,28 @@ public class ItemDAO {
                     "order_id = ol.id JOIN users u on u.id = ol.user_id" +
                     " WHERE u.id = ?)";
 
+    public static final String SQL__FIND_ITEM_BY_ID =
+            "SELECT * FROM items WHERE id = ?";
+
+    public Item findItemById(Long id){
+        Connection connection = null;
+        PreparedStatement preparedStatement = null;
+        Item item = null;
+        ResultSet resultSet = null;
+        try{
+            connection = DBManager.getInstance().getConnection();
+            preparedStatement = connection.prepareStatement(SQL__FIND_ITEM_BY_ID);
+            preparedStatement.setLong(1, id);
+            resultSet = preparedStatement.executeQuery();
+            ItemMapper mapper = new ItemMapper();
+
+            resultSet.next();
+            item = mapper.mapRow(resultSet);
+        } catch (SQLException exception) {
+            exception.printStackTrace();
+        }
+        return item;
+    }
 
     public int countOfPages(){
         return countOfItems() / itemsPerPage;

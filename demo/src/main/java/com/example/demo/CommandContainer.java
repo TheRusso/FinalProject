@@ -23,6 +23,7 @@ public class CommandContainer {
         commands.put("insert_user", new RegisterUserCommand());
         commands.put("change_lang", new ChangeLangCommand());
         commands.put("send_message_contacts", new SendMessageCommand());
+        commands.put("item", new OpenItemCommand());
     }
 
     public static Command get(String commandName){

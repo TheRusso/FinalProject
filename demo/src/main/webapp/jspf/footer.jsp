@@ -15,7 +15,7 @@
         2020 Directed by The Russo
     </p>
 
-    <ul style="position: absolute; bottom: -260px; left: 100px">
+    <ul style="position: relative; bottom: 70px;">
         <li>
             <form action="view" method="post">
                 <input type="hidden" name="command" value="change_lang">

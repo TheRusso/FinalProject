@@ -14,7 +14,8 @@ public enum Path {
     ABOUT_US_PAGE("/pages/aboutUs.jsp"),
     PRESS_PAGE("/pages/press.jsp"),
     LOGIN("/pages/login.jsp"),
-    NOT_FOUND("/pages/404.jsp");
+    NOT_FOUND("/pages/404.jsp"),
+    ITEM_PAGE("/pages/item.jsp");
 
     String value;
 

@@ -1,11 +1,11 @@
 
-v	java:S115
-"ZRename this constant name to match the regular expression '^[A-Z][A-Z0-9]*(_[A-Z0-9]+)*$'.(¼ºÏ8àˆâÕ˜/
-{	java:S115"ZRename this constant name to match the regular expression '^[A-Z][A-Z0-9]*(_[A-Z0-9]+)*$'.(‹”«şÿÿÿÿ8îïâÕ˜/
-q
-java:S2095"OUse try-with-resources or close this "PreparedStatement" in a "finally" clause.(áäÓ¸ÿÿÿÿÿ8£·ŸÖ˜/
 q
 java:S2095H"OUse try-with-resources or close this "PreparedStatement" in a "finally" clause.(˜‚Øíùÿÿÿÿ8¸æÖ˜/
-{	java:S115"ZRename this constant name to match the regular expression '^[A-Z][A-Z0-9]*(_[A-Z0-9]+)*$'.(›Ü‚ıüÿÿÿÿ8Ş–Ö˜/
+v	java:S115
+"ZRename this constant name to match the regular expression '^[A-Z][A-Z0-9]*(_[A-Z0-9]+)*$'.(¼ºÏ8àˆâÕ˜/
 i
 java:S20954"GUse try-with-resources or close this "Statement" in a "finally" clause.(‡²€·ıÿÿÿÿ8«‡Ö˜/
+q
+java:S2095"OUse try-with-resources or close this "PreparedStatement" in a "finally" clause.(áäÓ¸ÿÿÿÿÿ8£·ŸÖ˜/
+{	java:S115"ZRename this constant name to match the regular expression '^[A-Z][A-Z0-9]*(_[A-Z0-9]+)*$'.(›Ü‚ıüÿÿÿÿ8Ş–Ö˜/
+{	java:S115"ZRename this constant name to match the regular expression '^[A-Z][A-Z0-9]*(_[A-Z0-9]+)*$'.(‹”«şÿÿÿÿ8îïâÕ˜/
