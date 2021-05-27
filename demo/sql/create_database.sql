@@ -16,6 +16,14 @@ create table role(
 INSERT INTO role(id, role) VALUES (1, 'admin');
 INSERT INTO role(id, role) VALUES (2, 'client');
 
+CREATE TABLE categories(
+    id INTEGER NOT NULL AUTO_INCREMENT PRIMARY KEY ,
+    category VARCHAR(120) NOT NULL UNIQUE
+);
+
+INSERT INTO categories(category) VALUES ('dress');
+INSERT INTO categories(category) VALUES ('music');
+INSERT INTO categories(category) VALUES ('other');
 
 create table status(
     id INTEGER NOT NULL PRIMARY KEY ,
@@ -53,17 +61,18 @@ CREATE TABLE items(
       description TEXT,
       price FLOAT(2) NOT NULL ,
       count INTEGER NOT NULL ,
-      img text NOT NULL
+      img text NOT NULL,
+      category_id INTEGER NOT NULL REFERENCES categories(id)
 );
 
 INSERT INTO items(title, description, price, count, img)
-VALUES ('Milk', 'There is a cup of milk', 22.5, 20, '/img/photo1.png');
+VALUES ('Milk', 'There is a cup of milk', 22.5, 20, '/img/photo1.png', 1);
 
 INSERT INTO items(title, description, price, count, img)
-VALUES ('Fish', 'There is a fish', 12.2, 100, '/img/photo2.png');
+VALUES ('Fish', 'There is a fish', 12.2, 100, '/img/photo2.png', 1);
 
 INSERT INTO items(title, description, price, count, img)
-VALUES ('Phone', 'There is a phone', 200, 100, '/img/photo3.png');
+VALUES ('Phone', 'There is a phone', 200, 100, '/img/photo3.png', 2);
 
 CREATE TABLE good(
      item_id INTEGER NOT NULL REFERENCES items(id),

@@ -23,12 +23,33 @@ public class OrderDAO {
     private static final String SQL__FIND_ORDERS_BY_STATUS =
             "SELECT * FROM order_list WHERE status_id = ?";
 
+    private static final String SQL__ADD_ITEM_TO_GOODS =
+            "INSERT INTO good(item_id, user_id, quantity) VALUES (?, ?, ?)";
 
-    /**
-     * Returns all orders.
-     *
-     * @return List of order entities.
-     */
+
+//    public void addItemToGoods(Long itemId, Long userId, int quantity) throws SQLException {
+//        Connection connection = DBManager.getInstance().getConnection();
+//        PreparedStatement preparedStatement = connection.prepareStatement(SQL__ADD_ITEM_TO_GOODS);
+//
+//        preparedStatement.setLong(1, itemId);
+//        preparedStatement.setLong(2, userId);
+//        preparedStatement.setInt(3, quantity);
+//
+//        preparedStatement.executeUpdate();
+//
+//        DBManager.getInstance().commitAndClose(connection);
+//        preparedStatement.close();
+//    }
+//
+//    public void addItemToGoods(Long itemId, Long userId) throws SQLException {
+//        addItemToGoods(itemId, userId, 1);
+//    }
+
+        /**
+         * Returns all orders.
+         *
+         * @return List of order entities.
+         */
     public List<Order> findOrders() {
         List<Order> ordersList = new ArrayList<Order>();
         Statement stmt = null;

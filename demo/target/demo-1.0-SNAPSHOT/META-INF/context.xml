@@ -39,7 +39,7 @@ NONE  READ_COMMITTED  READ_UNCOMMITTED  REPEATABLE_READ SERIALIZABLE
   			type="javax.sql.DataSource"
 			maxActive="100" maxIdle="30" maxWait="10000"
 			username="root" password="1234"
-			driverClassName="com.mysql.jdbc.Driver"
+			driverClassName="com.mysql.cj.jdbc.Driver"
 			defaultAutoCommit="false"
 			defaultTransactionIsolation="READ_COMMITTED"
 			url="jdbc:mysql://localhost:3306/shop?serverTimezone=UTC"/>

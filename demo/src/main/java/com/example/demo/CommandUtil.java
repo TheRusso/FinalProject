@@ -28,4 +28,14 @@ public class CommandUtil {
             e.printStackTrace();
         }
     }
+
+    public static String wentFromPath(HttpServletRequest request){
+        String wentFromPath = request.getHeader("referer");
+        if(wentFromPath.contains("view"))
+            wentFromPath = wentFromPath.substring(wentFromPath.indexOf("view") - 1);
+        else
+            wentFromPath = "/";
+
+        return wentFromPath;
+    }
 }

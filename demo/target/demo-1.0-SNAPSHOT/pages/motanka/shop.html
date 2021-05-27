@@ -6,6 +6,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.0/css/bootstrap.min.css">
   <link rel="stylesheet" href="css/style2.css">
+  <link rel="stylesheet" href="css/style.css">
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.0/umd/popper.min.js"></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.0/js/bootstrap.min.js"></script>
@@ -47,7 +48,59 @@
             <img src="{% static 'images/separate_line.png' %}" alt="" class="img-fluid d-block mx-auto">
             <h1 class="display-2 text-center brusnika">Товари</h1>
         </div>
+        
+        <div style="margin-bottom: 20px">
+            <form action="view" method="GET" class="inner_pointer">
+                 <label for="">Sort by:</label><br>
+                  <input type="hidden" name="command" value="">
+                  <input type="hidden" name="page" value="1">
+                  <div class="row">
+                      <div class="col-sm-2">
+                          <label for="choice1">Name</label>  
+                          <input type="radio" id="choice1" name="sort" value="name">
+                      </div>
+                      <div class="col-sm-2">
+                          <label for="choice4">Price</label>
+                          <input type="radio" id="choice4" name="sort" value="price">
+                      </div>
+                      <div class="col-sm-2">
+                          <label for="choice6">New</label>
+                          <input type="radio" id="choice6" name="sort" value="new" checked>
+                      </div>
+                  </div>
+                  
+                  <div class="row">
+                      <div class="col-sm-2">
+                          <label for="choice31">ASC</label>  
+                          <input type="radio" id="choice31" name="order" value="ASC" checked>
+                      </div>
+                      <div class="col-sm-2">
+                          <label for="choice34">DESC</label>
+                          <input type="radio" id="choice34" name="order" value="DESC">
+                      </div>
+                  </div>
 
+                  <hr>
+                  
+                  <label for="">Category</label>
+                  <div class="row">
+                      <div class="col-sm-2">
+                          <label for="choice21">Dress</label>  
+                          <input type="checkbox" id="choice21" name="clothes">
+                      </div>
+                      <div class="col-sm-2">
+                          <label for="choice22">Music</label>  
+                          <input type="checkbox" id="choice22" name="music">
+                      </div>
+                      <div class="col-sm-2">
+                          <label for="choice23">Other</label>
+                          <input type="checkbox" id="choice23" name="other">
+                      </div>
+                  </div>
+                  <input type="submit" id="filter_shop" class="text_from_input hover_effect">
+            </form>
+        </div>
+        
         <div class="row d-flex justify-content-around">
 
                 <div class="card col-xl-3 col-lg-5 col-md-8 col-sm-9 m-10-20">

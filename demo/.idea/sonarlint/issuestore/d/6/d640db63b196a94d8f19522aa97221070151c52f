@@ -1,18 +1,0 @@
-
-Y
-java:S1068"<Remove this unused "SQL_GET_ORDER_BY_USER_ID" private field.(˜ãîÌ8Š¿®ü—/
-{	java:S115"ZRename this constant name to match the regular expression '^[A-Z][A-Z0-9]*(_[A-Z0-9]+)*$'.(Ëÿ·°úÿÿÿÿ8¨Ç¿ü—/
-i
-java:S2095d"GUse try-with-resources or close this "Statement" in a "finally" clause.(‡²€·ıÿÿÿÿ8º¡°ı—/
-v	java:S115"ZRename this constant name to match the regular expression '^[A-Z][A-Z0-9]*(_[A-Z0-9]+)*$'.(šè„€8Üú¾ü—/
-{
-java:S2293>"YReplace the type specification in this constructor call with the diamond operator ("<>").(äÒÓäúÿÿÿÿ8Ÿ®³ı—/
-l
-java:S2095ƒ"OUse try-with-resources or close this "PreparedStatement" in a "finally" clause.(—Á8ëèšı—/
-q
-java:S2095E"OUse try-with-resources or close this "PreparedStatement" in a "finally" clause.(ÜØïèşÿÿÿÿ8Ÿ®³ı—/
-d
-java:S2095("GUse try-with-resources or close this "Statement" in a "finally" clause.(œïì”8Õ´ı—/
-{
-java:S2293!"YReplace the type specification in this constructor call with the diamond operator ("<>").(äÒÓäúÿÿÿÿ8Õ´ı—/
-{	java:S115"ZRename this constant name to match the regular expression '^[A-Z][A-Z0-9]*(_[A-Z0-9]+)*$'.(×ïÖ²ûÿÿÿÿ8ÈÔÃü—/

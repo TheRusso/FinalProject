@@ -1,20 +1,12 @@
 
 7
 pom.xml,4\4\442292b8a7efeabbe4cc176709b833b1792140ec
-O
-src/main/webapp/WEB-INF/web.xml,2\e\2e22b6edd746fa3dc40ad7276c87c8d87d72a392
 I
 src/main/webapp/index.jsp,8\e\8e6d3b70c9f5b02570779b0441540d45eceb0ded
 [
 +src/main/java/com/example/demo/Command.java,3\0\309ea0d23052507825ec40ffe3765a954fe4fc11
-^
-.src/main/java/com/example/demo/Controller.java,9\8\988da4df79fb21390a991cf5b649ae9ab52f6858
-T
-$src/main/webapp/META-INF/context.xml,c\b\cbfb0d2e9b2b9fbf9d54374577c894a38643c6d0
 R
 "src/main/java/db/EntityMapper.java,a\0\a0e0368e64cdbb3aa38c68c8e0025d3f8b436946
-O
-src/main/java/db/DBManager.java,7\9\79a520fd0ad03d6b422ba9c8b83aa0250d4d5a95
 U
 %src/main/java/db/entities/Entity.java,f\6\f6c3570d1976b082b39a7bfa39b24b3697607c9f
 L
@@ -25,12 +17,6 @@ X
 (src/main/java/db/bean/UserOrderBean.java,1\a\1a375415026a05296d1ee009ec0f6f7871891c59
 L
 src/main/java/db/Fields.java,2\7\27dc7d39cdd1b454bcf4987eb2956908fad43fff
-N
-src/main/java/db/OrderDAO.java,d\6\d640db63b196a94d8f19522aa97221070151c52f
-G
-sql/create_database.sql,f\e\fe955005962704993ad86aa7dfdf19cd493e5068
-S
-#src/main/java/db/entities/Item.java,2\8\288f99e26fda9c208a56eb39b6a6b128c602297d
 T
 $src/main/java/db/entities/Order.java,9\0\904c98fda585e1c71ce9b200555623aaa68d3a72
 S
@@ -75,8 +61,6 @@ W
 'src/main/webapp/pages/motanka/base.html,b\1\b1ab6f664582bc7efa4434811898b2f58fabcd74
 n
 >src/main/java/com/example/demo/filter/CommandAccessFilter.java,e\2\e2cb8d4d8a11c8216c4ab51dccacd3196c2d0fef
-i
-9src/main/java/com/example/demo/filter/EncodingFilter.java,d\0\d009da5c1182316dbb2c37ab7f5eef1352376e8f
 R
 "src/main/webapp/jspf/head_page.jsp,2\8\28ddb95f52a159f844e559a40b65e6ac4be67958
 O
@@ -93,24 +77,16 @@ k
 ;src/main/java/com/example/demo/OpenContactsPageCommand.java,d\4\d45005c96d3a6adfd1ee0c57cf645130fb03c551
 R
 "src/main/webapp/pages/contacts.jsp,1\4\1451a083d971ab286e99a429d311305b63533c2c
-O
-src/main/webapp/jspf/header.jsp,a\7\a7670e04757d20a3783d4fd3e554081959856aa1
 Q
 !src/main/webapp/pages/aboutUs.jsp,7\7\77c666e855a2b75b30b08daf41123e31c673e88c
 Q
 !src/main/webapp/pages/article.jsp,f\4\f49da37694d250676c5280c023c583763045907c
-c
-3src/main/java/com/example/demo/OpenAboutUsPage.java,2\5\259465572d8a42f2e0b297444f77c343e1c4f46d
 j
 :src/main/java/com/example/demo/OpenArticlePageCommand.java,b\e\bea54720f285b8e60c559ba7c69f19838d74e927
 h
 8src/main/java/com/example/demo/OpenPressPageCommand.java,2\0\20d709b5d7dc8c4dfd60ffdcf75f52eac571a8fd
 O
 src/main/webapp/pages/press.jsp,0\e\0e06deb187f2260e21d45d1dbde8121ddccb8e6d
-e
-5src/main/java/com/example/demo/ChangeLangCommand.java,7\2\72d77854876c56cabe2137a1510c8fcd5bd5e0b1
-j
-:.idea/dataSources/a5d599e0-a72b-4941-9016-a58b935646d4.xml,0\0\00dcf5749176bf6b5f53043935b432320038f1cf
 [
 +src/main/webapp/pages/motanka/about_us.html,c\e\ce66802e6776b1b8fe40ca0743f0466d6c1c4b98
 d
@@ -161,8 +137,6 @@ i
 +src/main/webapp/pages/motanka/contacts.html,7\8\785c18aec42763ffd4acdc54974ae06932309ffa
 d
 4target/demo-1.0-SNAPSHOT/pages/motanka/contacts.html,d\1\d1a25c87d274da588af7894fb3f738117a046df9
-]
--target/demo-1.0-SNAPSHOT/META-INF/context.xml,6\a\6af6800efec53488836993e2cd43edeaf5a403b6
 Z
 *src/main/webapp/pages/motanka/js/custom.js,0\5\0550a6158d677b3952d7290ac9db1db916874118
 c
@@ -265,10 +239,6 @@ f
 +src/main/webapp/pages/motanka/register.html,6\8\68b01ba2f079f1d8bcc8c63c3e64204684a6d0c3
 d
 4target/demo-1.0-SNAPSHOT/pages/motanka/register.html,1\7\176ff01dbe40d2b0510e46e0577f0fa3a9e90246
-`
-0target/demo-1.0-SNAPSHOT/pages/motanka/shop.html,c\5\c58ecec29de8eb89393d5858b372ab856d000150
-d
-4target/demo-1.0-SNAPSHOT/pages/motanka/css/style.css,9\4\94b3a31ab51349c5fbb772ada74f2af0c0432473
 _
 /target/demo-1.0-SNAPSHOT/pages/success_page.jsp,a\e\ae6d6aba88f9a6bb54c5d3371a58b9afb87c45d9
 X
@@ -281,10 +251,6 @@ d
 4src/main/java/com/example/demo/OpenMediaCommand.java,c\0\c062f35dc01a5536613500cdf203735ddec30856
 `
 0src/main/java/com/example/demo/RedirectType.java,9\5\95a88774edb10fb8e4c1725acf780a716311fc6f
-c
-3src/main/java/com/example/demo/ServletResponse.java,e\9\e903d335e7541246f1b57c3eb36bb6941528b749
-_
-/src/main/java/com/example/demo/CommandUtil.java,3\8\3832c7dded8a673e9c3adc32f82516281088324e
 [
 +target/demo-1.0-SNAPSHOT/pages/contacts.jsp,1\4\146f17b0dd005beee6469eff62380eb6475d2230
 ]
@@ -304,20 +270,42 @@ p
 [
 +target/demo-1.0-SNAPSHOT/jspf/head_page.jsp,e\3\e3f930dc56389d247317ff141e55d6ec99b2522f
 X
-(target/demo-1.0-SNAPSHOT/jspf/header.jsp,d\6\d6e755f441b7f92c8ee364db66a402c453edf8b1
-X
 (target/demo-1.0-SNAPSHOT/pages/login.jsp,0\3\036dd1b429553e756301968c8f80cb06f8870a52
 [
 +target/demo-1.0-SNAPSHOT/pages/register.jsp,2\f\2fd6dc0f0649584b87aa20f8b34590c803ebe42a
 e
 5target/demo-1.0-SNAPSHOT/pages/motanka/css/style2.css,d\1\d1c2494622f545fd18f4b847fe68a06e28b5429c
-X
-(target/demo-1.0-SNAPSHOT/WEB-INF/web.xml,d\0\d007c4a433ad71b5a069d8b61dfc5f876658e9e0
 M
 src/main/webapp/pages/404.jsp,1\1\116af29b3799ae416e10251c00abcaa39f26909d
 W
 'src/main/webapp/pages/motanka/item.html,f\b\fb6634db612b37e2edb48a9bd8333a3f953d02d5
 N
 src/main/webapp/pages/item.jsp,2\3\23346844e6421a24ad5f92dec514f79359f9b099
+`
+0src/main/java/com/example/demo/LoginCommand.java,d\e\de775014b71508487a49cac674cb9300deb2eba7
+O
+src/main/webapp/jspf/footer.jsp,3\2\32a3de4268e713feeb880f83b0b70d496cb5cb7f
+S
+#src/main/webapp/pages/item_list.jsp,c\8\c8c387a9b3faa916e3afee6f6df46d6e7517cb7c
+W
+'src/main/webapp/pages/motanka/shop.html,b\b\bb111949c19c1dced1455af266c101726c25e7bb
+[
++src/main/webapp/pages/motanka/css/style.css,1\a\1a9fd1a02cce0a9402962f094f5e666f6d6cad05
 c
 3src/main/java/com/example/demo/OpenItemCommand.java,6\9\695a1c28af4a0f48ffdd47d9123716686df50b94
+O
+src/main/java/db/DBManager.java,7\9\79a520fd0ad03d6b422ba9c8b83aa0250d4d5a95
+i
+9src/main/java/com/example/demo/filter/EncodingFilter.java,d\0\d009da5c1182316dbb2c37ab7f5eef1352376e8f
+^
+.src/main/java/com/example/demo/ShopChoose.java,d\0\d0ba91f99cc244314b4c5e5b7a2e62a7a111244e
+g
+7src/main/java/com/example/demo/OpenShopPageCommand.java,c\8\c8e99f096983166bf459979d128cd9604dc18db4
+`
+0src/main/java/com/example/demo/CheckCookies.java,a\7\a7cc4b2ecc528af4df1423aeeb982e148b342611
+c
+3src/main/java/com/example/demo/OpenAboutUsPage.java,2\5\259465572d8a42f2e0b297444f77c343e1c4f46d
+S
+#src/main/java/db/entities/Item.java,2\8\288f99e26fda9c208a56eb39b6a6b128c602297d
+V
+&src/main/webapp/pages/checkCookies.jsp,e\e\eeda565b04c0cba0434b7a50f943abaabd742d6f

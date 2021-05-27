@@ -54,6 +54,11 @@
                                 <a href="${pageContext.request.contextPath}/view/logout"><fmt:message key="header.logout" /></a>
                             </li>
                         </c:if>
+                        <li class="nav-item">
+                            <a href="${pageContext.request.contextPath}/view/cart">
+                                <img src="${pageContext.request.contextPath}/pages/motanka/img/Bucket-icon.png" height="50px" alt="">
+                            </a>
+                        </li>
 
                     </ul>
                 </div>

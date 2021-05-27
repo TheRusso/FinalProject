@@ -24,6 +24,8 @@ public class CommandContainer {
         commands.put("change_lang", new ChangeLangCommand());
         commands.put("send_message_contacts", new SendMessageCommand());
         commands.put("item", new OpenItemCommand());
+        commands.put("cart_actions", new CartCommand());
+        commands.put("cart", new OpenCartCommand());
     }
 
     public static Command get(String commandName){

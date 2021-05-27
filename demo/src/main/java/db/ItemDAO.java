@@ -1,5 +1,6 @@
 package db;
 
+import com.example.demo.ShopChoose;
 import db.entities.Item;
 
 import java.sql.*;
@@ -15,6 +16,12 @@ public class ItemDAO {
 
     private static final String SQL__COUNT_OF_ITEMS =
             "SELECT COUNT(id) as count FROM items";
+
+    private static final String SQL__FIND_PAGE_ORDER_DESC =
+            "SELECT * FROM items ORDER by price DESC LIMIT ?, ?";
+
+    private static final String SQL__FIND_PAGE_ORDER_ASC =
+            "SELECT * FROM items ORDER by ? LIMIT ?, ?";
 
     private static final String SQL__FIND_ITEMS_FOR_PAGE =
             "SELECT * FROM items LIMIT ?,?";
@@ -44,14 +51,44 @@ public class ItemDAO {
 
             resultSet.next();
             item = mapper.mapRow(resultSet);
+
         } catch (SQLException exception) {
             exception.printStackTrace();
+        }finally {
+            DBManager.getInstance().commitAndClose(connection);
         }
+
         return item;
     }
 
-    public int countOfPages(){
-        return countOfItems() / itemsPerPage;
+    public int countOfPages(String sortBy, String order, List<String> categories){
+        return countOfItems(sortBy, order, categories) / itemsPerPage;
+    }
+
+    public int countOfItems(String sortBy, String order, List<String> categories){
+        Connection connection = null;
+        Statement statement = null;
+        ResultSet resultSet = null;
+        int count = 0;
+        try{
+            connection = DBManager.getInstance().getConnection();
+
+
+            String sql = ShopChoose.getSQL(sortBy, order, categories).replace("*", "COUNT(id) as count").replace(" LIMIT ?, ?", "");
+            statement = connection.createStatement();
+
+            resultSet = statement.executeQuery(sql);
+
+            resultSet.next();
+            count = resultSet.getInt("count");
+
+        } catch (SQLException exception) {
+            exception.printStackTrace();
+        }finally {
+            DBManager.getInstance().commitAndClose(connection);
+        }
+
+        return count;
     }
 
     public int countOfItems(){
@@ -62,13 +99,18 @@ public class ItemDAO {
         try{
             connection = DBManager.getInstance().getConnection();
             statement = connection.createStatement();
+
             resultSet = statement.executeQuery(SQL__COUNT_OF_ITEMS);
 
             resultSet.next();
             count = resultSet.getInt("count");
+
         } catch (SQLException exception) {
             exception.printStackTrace();
+        }finally {
+            DBManager.getInstance().commitAndClose(connection);
         }
+
         return count;
     }
 
@@ -83,6 +125,35 @@ public class ItemDAO {
             preparedStatement.setInt(1, itemsPerPage * (page - 1));
             preparedStatement.setInt(2, itemsPerPage);
 
+            ResultSet rs = preparedStatement.executeQuery();
+
+            ItemMapper mapper = new ItemMapper();
+            while (rs.next())
+                items.add(mapper.mapRow(rs));
+
+        } catch (SQLException exception) {
+            exception.printStackTrace();
+        }finally {
+            DBManager.getInstance().commitAndClose(connection);
+        }
+
+        return items;
+    }
+
+    public List<Item> findItemsPage(int page, String sortBy, String order, List<String> categories){
+        Connection connection = null;
+        PreparedStatement preparedStatement = null;
+        ResultSet resultSet = null;
+        List<Item> items = new ArrayList<>();
+        try{
+            connection = DBManager.getInstance().getConnection();
+
+
+            preparedStatement = connection.prepareStatement(ShopChoose.getSQL(sortBy, order, categories));
+
+            preparedStatement.setInt(1, itemsPerPage * (page - 1));
+            preparedStatement.setInt(2, itemsPerPage);
+
             System.out.println(preparedStatement);
 
             ResultSet rs = preparedStatement.executeQuery();
@@ -91,10 +162,10 @@ public class ItemDAO {
             while (rs.next())
                 items.add(mapper.mapRow(rs));
 
-            connection.close();
-            preparedStatement.close();
         } catch (SQLException exception) {
             exception.printStackTrace();
+        }finally {
+            DBManager.getInstance().commitAndClose(connection);
         }
         return items;
     }

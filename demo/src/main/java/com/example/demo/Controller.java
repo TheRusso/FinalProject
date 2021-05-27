@@ -41,11 +41,13 @@ public class Controller extends HttpServlet {
 
         if(matcher.find())
             path = matcher.group(1);
+        log.severe("Request parameter: command --> " + path);
 
-        Command command = null;
+        Command command = CommandContainer.get(path);
+        log.severe("Obtained command --> " + command);
 
-        command = CommandContainer.get(path);
         ServletResponse servletResponse = command.execute(request, response);
+        log.severe("Forward address --> " + servletResponse.getPath());
 
         CommandUtil.goToPage(request, response, servletResponse);
     }
