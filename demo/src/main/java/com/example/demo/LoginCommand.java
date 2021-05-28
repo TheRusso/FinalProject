@@ -30,7 +30,6 @@ public class LoginCommand extends Command{
             String password = request.getParameter("password");
 
 
-
             //error handler
             String errorMessage = null;
             servletResponse.setPath(Path.PAGE__ERROR_PAGE.value);
@@ -59,8 +58,14 @@ public class LoginCommand extends Command{
                 if(userRole == Role.ADMIN)
                     servletResponse.setPath(Path.COMMAND__LIST_ORDERS.value);
 
-                if(userRole == Role.CLIENT)
+                if(userRole == Role.CLIENT) {
                     servletResponse.setPath(Path.COMMAND__LIST_ITEM.value);
+                }
+
+                System.out.println(request.getParameter("to"));
+                if(request.getParameter("to") != null && request.getParameter("to").equals("order")){
+                    servletResponse.setPath("view/order");
+                }
 
                 System.out.println("Session");
                 session.setAttribute("user", user);
@@ -75,7 +80,6 @@ public class LoginCommand extends Command{
             log.severe("Command finished");
 
             servletResponse.setRedirectType(RedirectType.REDIRECT);
-            servletResponse.setPath(Path.MAIN_PAGE.value);
         }
 
         return servletResponse;

@@ -16,7 +16,8 @@ public enum Path {
     LOGIN("/pages/login.jsp"),
     NOT_FOUND("/pages/404.jsp"),
     ITEM_PAGE("/pages/item.jsp"),
-    CART_PAGE("/pages/cart.jsp");
+    CART_PAGE("/pages/cart.jsp"),
+    ORDER_PAGE("/pages/order.jsp");
 
     String value;
 

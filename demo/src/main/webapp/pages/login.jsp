@@ -24,6 +24,7 @@
             <div class="info-form">
                 <form action="view" method="post" class="justify-content-center">
                     <input type="hidden" name="command" value="enter">
+                    <input type="hidden" name="to" value="${to}">
                     <div class="form-group">
                         <label for="exampleInputEmail1">Email address</label>
                         <input type="email" name="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter email" required>
@@ -54,7 +55,7 @@
 <%--                                <label for="register"></label>--%>
 <%--                                <input class="text_from_input" id="register" type="submit" value="<fmt:message key="register.register"/>"  style="margin-top: 10px;text-decoration: underline;">--%>
 <%--                            </form>--%>
-                            <fmt:message key="register.newUser"/> <a href="${pageContext.request.contextPath}/view/register" style="margin-left: 10px;color: white;text-decoration: underline;"><fmt:message key="register.register"/> </a>
+                            <fmt:message key="register.newUser"/> <a href="${pageContext.request.contextPath}/view/register<c:choose><c:when test="${to != null}">?to=${to}</c:when></c:choose>" style="margin-left: 10px;color: white;text-decoration: underline;"><fmt:message key="register.register"/> </a>
                         </div>
                     </div>
                 </div>

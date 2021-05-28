@@ -25,16 +25,12 @@ T
 $src/main/webapp/pages/error_page.jsp,4\3\43021bb141f48a59eb592f1300b41e0b49b70f14
 T
 $src/main/webapp/pages/order_list.jsp,b\4\b4dac1f77fe9f309b6353a4b1388f54079b66217
-O
-src/main/webapp/pages/login.jsp,f\9\f917108e3aedac2a9c4cc5dfd98f70b815e92372
 R
 "src/main/webapp/pages/register.jsp,1\0\106d036f90177a601daf026083638d839c6243d8
 d
 4src/main/java/com/example/demo/OpenRegisterPage.java,0\8\0844817183d1cb9fe4b68a58ff27134e0bea488d
 M
 src/main/java/db/UserDAO.java,1\c\1cf48afdedcb1f3d24d46ef4dbddf7f404322716
-h
-8src/main/java/com/example/demo/OpenLoginPageCommand.java,3\c\3cbed4f39ebb9194b3756b2cf4f6ad28c0f68666
 a
 1src/main/java/com/example/demo/Configuration.java,d\f\dfb4c01c36611c2d76c1dfb057ad958974e5aa3b
 g
@@ -129,16 +125,10 @@ e
 5target/demo-1.0-SNAPSHOT/pages/motanka/js/carousel.js,7\3\732f23d4b99c48ef3e63f515fd38f4afbcb28d4e
 `
 0target/demo-1.0-SNAPSHOT/pages/catalog_items.jsp,e\6\e69460c9db79562027c6d4b9484118ff672d4b65
-`
-0src/main/webapp/pages/motanka/js/confirm_pass.js,4\2\42aa7fa35dd9b2543ad8848b0a014ae5c7bb355e
-i
-9target/demo-1.0-SNAPSHOT/pages/motanka/js/confirm_pass.js,a\5\a5b028ae7f6697c1319030db0bb512327aaaf7e6
 [
 +src/main/webapp/pages/motanka/contacts.html,7\8\785c18aec42763ffd4acdc54974ae06932309ffa
 d
 4target/demo-1.0-SNAPSHOT/pages/motanka/contacts.html,d\1\d1a25c87d274da588af7894fb3f738117a046df9
-Z
-*src/main/webapp/pages/motanka/js/custom.js,0\5\0550a6158d677b3952d7290ac9db1db916874118
 c
 3target/demo-1.0-SNAPSHOT/pages/motanka/js/custom.js,0\5\05a367d711f6b9792d45ecdfe5a34bdcd764422c
 8
@@ -161,8 +151,6 @@ j
 .src/main/webapp/pages/motanka/js/jquery.min.js,b\4\b4bcbd7d55e7b0cd6f13d0808b3f8288762f40ce
 g
 7target/demo-1.0-SNAPSHOT/pages/motanka/js/jquery.min.js,0\9\0990cc1148ad9c9a12ddc20a6bc336bfa35d724b
-V
-&src/main/webapp/pages/motanka/js/js.js,5\1\51e308f3fff652f5f6ba615f24651488e2fccf1c
 _
 /target/demo-1.0-SNAPSHOT/pages/motanka/js/js.js,0\d\0decd048a6e5b3cd3d9bea43a3f4a6ea1b520cd2
 Q
@@ -255,34 +243,14 @@ d
 +target/demo-1.0-SNAPSHOT/pages/contacts.jsp,1\4\146f17b0dd005beee6469eff62380eb6475d2230
 ]
 -target/demo-1.0-SNAPSHOT/pages/error_page.jsp,2\b\2babd24548daaa437bae56face6f7b9e805c1c57
-T
-$src/main/resources/errors.properties,6\8\68d9fe554fdfb7db84b89946c7f083080a276afa
-P
- target/classes/errors.properties,2\2\22ab76778c95a297e4543eca9ef08c1cd42c7081
-j
-:target/demo-1.0-SNAPSHOT/WEB-INF/classes/errors.properties,0\2\02c13f328ac48fd95c9afb2defefc8f979e2a005
-Z
-*src/main/resources/errors_ru_RU.properties,6\c\6c05f949f9ec9f713d3325c5a5fae160f3334b5e
-V
-&target/classes/errors_ru_RU.properties,3\5\355a655b210a3c66a8218e097a6e89182d2f4757
-p
-@target/demo-1.0-SNAPSHOT/WEB-INF/classes/errors_ru_RU.properties,e\4\e4e5d17148157b4cf2eb13f7ae3f7034f6cc9345
 [
 +target/demo-1.0-SNAPSHOT/jspf/head_page.jsp,e\3\e3f930dc56389d247317ff141e55d6ec99b2522f
-X
-(target/demo-1.0-SNAPSHOT/pages/login.jsp,0\3\036dd1b429553e756301968c8f80cb06f8870a52
 [
 +target/demo-1.0-SNAPSHOT/pages/register.jsp,2\f\2fd6dc0f0649584b87aa20f8b34590c803ebe42a
 e
 5target/demo-1.0-SNAPSHOT/pages/motanka/css/style2.css,d\1\d1c2494622f545fd18f4b847fe68a06e28b5429c
 M
 src/main/webapp/pages/404.jsp,1\1\116af29b3799ae416e10251c00abcaa39f26909d
-W
-'src/main/webapp/pages/motanka/item.html,f\b\fb6634db612b37e2edb48a9bd8333a3f953d02d5
-N
-src/main/webapp/pages/item.jsp,2\3\23346844e6421a24ad5f92dec514f79359f9b099
-`
-0src/main/java/com/example/demo/LoginCommand.java,d\e\de775014b71508487a49cac674cb9300deb2eba7
 O
 src/main/webapp/jspf/footer.jsp,3\2\32a3de4268e713feeb880f83b0b70d496cb5cb7f
 S

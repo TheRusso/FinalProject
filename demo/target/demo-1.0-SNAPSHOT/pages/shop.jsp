@@ -157,7 +157,7 @@
                     </a>
                     <div class="d-flex justify-content-between">
                         <p class="price text-dark">$${item.price}</p>
-                        <a class="btn btn-primary" onclick="addToCart(${item.id})"><fmt:message key="shop.buy"/></a>
+                        <a class="btn btn-primary" onclick="addToCart(${item.id})"><fmt:message key="shop.to_cart"/></a>
                     </div>
                 </div>
             </div>
