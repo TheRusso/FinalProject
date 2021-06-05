@@ -30,7 +30,7 @@
 
     <servlet>
         <servlet-name>Controller</servlet-name>
-        <servlet-class>com.example.demo.Controller</servlet-class>
+        <servlet-class>com.example.demo.controllers.Controller</servlet-class>
     </servlet>
     <servlet-mapping>
         <servlet-name>Controller</servlet-name>

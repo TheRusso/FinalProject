@@ -1,7 +1,7 @@
 package com.example.demo.filter;
 
 import com.example.demo.utils.Configuration;
-import com.example.demo.Path;
+import com.example.demo.controllers.Path;
 import org.apache.log4j.Logger;
 
 import javax.servlet.*;

@@ -1,7 +1,7 @@
 package com.example.demo.utils;
 
 import com.example.demo.db.entities.Item;
-import com.example.demo.db.services.serviceImpl.ItemService;
+import com.example.demo.services.serviceImpl.ItemService;
 
 
 import javax.servlet.http.HttpServletRequest;

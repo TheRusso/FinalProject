@@ -1,6 +1,7 @@
 package com.example.demo.db;
 
 import com.example.demo.db.dao.SQLProperyNamesHandler;
+import com.example.demo.utils.CategoryUtil;
 import com.example.demo.utils.DBHandlerUtil;
 
 import java.io.IOException;
@@ -15,7 +16,7 @@ public class ShopChooseQuery {
         int currentCategory = 0;
 
         for (int i = 0; i < categories.size(); i++) {
-            if(isValidCategory(categories.get(i))){
+            if(new CategoryUtil().isValidCategory(categories.get(i))){
                 if(!sql.toString().contains(" category_id IN"))
                     sql.append(" and category_id IN(SELECT id FROM categories WHERE ");
 
@@ -76,16 +77,5 @@ public class ShopChooseQuery {
 
         return sql.replace("?", query.toString());
     }
-
-    public static boolean isValidCategory(String category){
-        List<String> rows = new ArrayList<>();
-        rows.add("music");
-        rows.add("clothes");
-        rows.add("other");
-
-        return rows.contains(category);
-    }
-
-
 
 }
