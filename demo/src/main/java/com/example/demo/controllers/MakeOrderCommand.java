@@ -8,6 +8,8 @@ import com.example.demo.db.dao.OrderDAO;
 import com.example.demo.db.Status;
 import com.example.demo.db.entities.Order;
 import com.example.demo.db.entities.User;
+import com.example.demo.db.services.serviceImpl.OrderService;
+import com.example.demo.utils.Configuration;
 import org.apache.log4j.Logger;
 
 import javax.servlet.http.HttpServletRequest;
@@ -23,36 +25,33 @@ public class MakeOrderCommand extends Command {
     @Override
     public ServletResponse execute(HttpServletRequest request, HttpServletResponse response) {
 
-        Order order = new Order();
         User user = (User)request.getSession().getAttribute("user");
-        order.setUser_id(user.getId());
-        order.setCity(request.getParameter("city"));
-        order.setCountry_id(Long.parseLong(request.getParameter("country_id")));
-        order.setFirstName(request.getParameter("first_name"));
-        order.setLastName(request.getParameter("second_name"));
-        order.setAddress(request.getParameter("address"));
-        order.setDelivery_type_id(Long.parseLong(request.getParameter("delivery_type_id")));
-        order.setStatus_id(Status.REGISTERED.getId());
 
-        // id, quantity
-        Map<Integer, Integer> items = new HashMap<>();
+        Order order = new Order.Builder()
+                .withUserId(user.getId())
+                .withCity(request.getParameter("city"))
+                .withCountryId(Long.parseLong(request.getParameter("country_id")))
+                .withFirstName(request.getParameter("first_name"))
+                .withSecondName(request.getParameter("second_name"))
+                .withAddress(request.getParameter("address"))
+                .withDeliveryTypeId(Long.parseLong(request.getParameter("delivery_type_id")))
+                .withStatusId(Status.REGISTERED.getId())
+                .build();
 
-        HttpSession session = request.getSession();
-        Enumeration attributeNames = session.getAttributeNames();
+        boolean isInserted = new OrderService().makeOrder(order, request);
 
-        while (attributeNames.hasMoreElements()){
-            String attribute = attributeNames.nextElement().toString();
-            if(isValid(attribute)){
-                items.put(getId(attribute), Integer.parseInt(session.getAttribute(attribute).toString()));
-            }
+        if(!isInserted){
+            request.setAttribute("errorMessage", Configuration.getInstance().getErrorMessage("wrongURL"));
+
+            return new ServletResponse.Builder()
+                    .withPath(Path.PAGE__ERROR_PAGE.getValue())
+                    .build();
         }
 
-        order.setItems(items);
-        logger.info("Order: " + order);
-
-        new OrderDAO().makeOrder(order);
-
-        return new ServletResponse(Path.MAIN_PAGE.getValue(), RedirectType.REDIRECT);
+        return new ServletResponse.Builder()
+                .withPath(Path.MAIN_PAGE.getValue())
+                .withRedirect(RedirectType.REDIRECT)
+                .build();
     }
 
     private Integer getId(String str){

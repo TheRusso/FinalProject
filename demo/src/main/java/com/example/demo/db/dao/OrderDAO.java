@@ -264,7 +264,7 @@ public class OrderDAO {
         try{
             logger.info("Start adding an items to orders");
             logger.info(order.getItems());
-            for (Map.Entry<Integer, Integer> entry:
+            for (Map.Entry<Long, Integer> entry:
                  order.getItems().entrySet()) {
                     logger.info(entry);
                     connection = DBManager.getInstance().getConnection();

@@ -10,6 +10,59 @@ public class Item extends Entity{
     private int disable;
     private int category_id;
 
+
+    public static class Builder{
+        private Item item;
+
+        public Builder() {
+            item = new Item();
+        }
+
+        public Builder withTitle(String title){
+            item.setTitle(title);
+            return this;
+        }
+
+        public Builder withDescription(String description){
+            item.setDescription(description);
+            return this;
+        }
+
+        public Builder withPrice(Float price){
+            item.setPrice(price);
+            return this;
+        }
+
+        public Builder withCount(int count){
+            item.setCount(count);
+            return this;
+        }
+
+        public Builder withImg(String img){
+            item.setImg(img);
+            return this;
+        }
+
+        public Builder withQuantity(int quantity){
+            item.setQuantity(quantity);
+            return this;
+        }
+
+        public Builder withDisable(int disable){
+            item.setDisable(disable);
+            return this;
+        }
+
+        public Builder withCategory_id(int category_id){
+            item.setCategory_id(category_id);
+            return this;
+        }
+
+        public Item build(){
+            return item;
+        }
+    }
+
     public int getCategory_id() {
         return category_id;
     }

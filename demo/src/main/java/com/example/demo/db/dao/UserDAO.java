@@ -83,6 +83,34 @@ public class UserDAO {
     }
 
     /**
+     * Returns list of all users
+     *
+     * @return List of user entities
+     */
+    public List<User> findAll(){
+        List<User> list = new ArrayList<>();
+        Statement statement = null;
+        ResultSet rs = null;
+        Connection connection = null;
+
+        try{
+            connection = DBManager.getInstance().getConnection();
+            UserMapper mapper = new UserMapper();
+
+            statement = connection.createStatement();
+
+            rs = statement.executeQuery(DBHandlerUtil.getInstance().getSQL(SQLProperyNamesHandler.USER_FIND_ALL.getPropertyName()));
+
+            while (rs.next())
+                list.add(mapper.mapRow(rs));
+
+        } catch (SQLException | IOException exception) {
+            exception.printStackTrace();
+        }
+        return list;
+    }
+
+    /**
      *  Returns bean in such way
      *
      *  id | first_name | second_name | email | role_id
@@ -150,7 +178,7 @@ public class UserDAO {
      *             Entity user to update
      */
 
-    public void updateUser(User user){
+    public boolean updateUser(User user){
         Connection con = null;
         try{
             con = DBManager.getInstance().getConnection();
@@ -158,9 +186,12 @@ public class UserDAO {
         } catch (SQLException | IOException exception) {
             DBManager.getInstance().rollbackAndClose(con);
             exception.printStackTrace();
+            return false;
         }finally {
             DBManager.getInstance().commitAndClose(con);
         }
+
+        return true;
     }
 
     /**

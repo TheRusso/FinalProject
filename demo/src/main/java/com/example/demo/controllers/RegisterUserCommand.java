@@ -3,6 +3,7 @@ package com.example.demo.controllers;
 import com.example.demo.*;
 import com.example.demo.db.dao.UserDAO;
 import com.example.demo.db.entities.User;
+import com.example.demo.utils.Configuration;
 import org.apache.log4j.Logger;
 
 import javax.servlet.http.HttpServletRequest;

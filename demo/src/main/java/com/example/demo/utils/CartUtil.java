@@ -41,7 +41,11 @@ public class CartUtil {
         return map;
     }
 
-    private Long getIdSuffix(String attr){
+    public boolean isValid(String attr){
+        return attr.contains(ITEM_PREFIX_CART);
+    }
+
+    public Long getIdSuffix(String attr){
         return Long.parseLong(attr.substring(attr.indexOf("_") + 1));
     }
 }

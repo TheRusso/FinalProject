@@ -1,6 +1,6 @@
 package com.example.demo.filter;
 
-import com.example.demo.Configuration;
+import com.example.demo.utils.Configuration;
 import com.example.demo.Path;
 import org.apache.log4j.Logger;
 

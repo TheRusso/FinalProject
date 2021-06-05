@@ -49,6 +49,8 @@ public enum SQLProperyNamesHandler {
 
     USER_INSERT("user.insert"),
 
+    USER_FIND_ALL("user.find_all"),
+
     USER_FIND_BY_EMAIL("user.find_by_email");
 
 

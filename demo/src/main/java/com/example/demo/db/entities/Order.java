@@ -13,7 +13,59 @@ public class Order extends Entity{
     private Long delivery_type_id;
     private int status_id;
 
-    private Map<Integer, Integer> items = new HashMap<>();
+    private Map<Long, Integer> items = new HashMap<>();
+
+    public static class Builder{
+        private Order order;
+
+        public Builder() {
+            order = new Order();
+        }
+
+        public Builder withFirstName(String name){
+            order.setFirstName(name);
+            return this;
+        }
+
+        public Builder withSecondName(String name){
+            order.setLastName(name);
+            return this;
+        }
+
+        public Builder withUserId(Long id){
+            order.setUser_id(id);
+            return this;
+        }
+
+        public Builder withAddress(String address){
+            order.setAddress(address);
+            return this;
+        }
+
+        public Builder withCity(String city){
+            order.setCity(city);
+            return this;
+        }
+
+        public Builder withCountryId(Long id){
+            order.setCountry_id(id);
+            return this;
+        }
+
+        public Builder withDeliveryTypeId(Long id){
+            order.setDelivery_type_id(id);
+            return this;
+        }
+
+        public Builder withStatusId(int id){
+            order.setStatus_id(id);
+            return this;
+        }
+
+        public Order build(){
+            return order;
+        }
+    }
 
     public String getFirstName() {
         return firstName;
@@ -31,11 +83,11 @@ public class Order extends Entity{
         this.lastName = lastName;
     }
 
-    public Map<Integer, Integer> getItems() {
+    public Map<Long, Integer> getItems() {
         return items;
     }
 
-    public void setItems(Map<Integer, Integer> items) {
+    public void setItems(Map<Long, Integer> items) {
         this.items = items;
     }
 

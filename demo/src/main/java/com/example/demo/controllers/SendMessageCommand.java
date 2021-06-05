@@ -3,6 +3,7 @@ package com.example.demo.controllers;
 import com.example.demo.*;
 import com.example.demo.db.dao.ContactsDAO;
 import com.example.demo.db.entities.Message;
+import com.example.demo.utils.Configuration;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;

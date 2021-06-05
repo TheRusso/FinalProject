@@ -16,6 +16,28 @@ public class ServletResponse {
         this.path = path;
     }
 
+    public static class Builder{
+        private ServletResponse servletResponse;
+
+        public Builder() {
+            servletResponse = new ServletResponse();
+        }
+
+        public Builder withPath(String path){
+            servletResponse.setPath(path);
+            return this;
+        }
+
+        public Builder withRedirect(RedirectType redirectType){
+            servletResponse.setRedirectType(redirectType);
+            return this;
+        }
+
+        public ServletResponse build(){
+            return servletResponse;
+        }
+    }
+
     public RedirectType getRedirectType() {
         return redirectType;
     }

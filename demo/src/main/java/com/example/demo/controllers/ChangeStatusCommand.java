@@ -3,6 +3,7 @@ package com.example.demo.controllers;
 import com.example.demo.Command;
 import com.example.demo.ServletResponse;
 import com.example.demo.db.dao.OrderDAO;
+import com.example.demo.db.services.serviceImpl.OrderService;
 import org.apache.log4j.Logger;
 
 import javax.servlet.http.HttpServletRequest;
@@ -21,7 +22,7 @@ public class ChangeStatusCommand extends Command {
 
         logger.info(String.format("Change status order: order_id = %s, status_id = %s", id, integer));
 
-        new OrderDAO().updateStatus(id, integer);
+        new OrderService().updateStatus(id, integer);
 
         return null;
     }

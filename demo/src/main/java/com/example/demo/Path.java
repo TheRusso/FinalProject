@@ -5,6 +5,8 @@ import javax.servlet.http.HttpServletRequest;
 public enum Path {
     ADMIN_PANEL_URL("/view/admin"),
     SHOP_PAGE_URL("/view/shop"),
+    USER_PAGE_URL("/view/user"),
+    ORDER_FORM_URL("/view/order"),
 
     PAGE__ERROR_PAGE("/pages/error_page.jsp"),
     MAIN_PAGE("/"),

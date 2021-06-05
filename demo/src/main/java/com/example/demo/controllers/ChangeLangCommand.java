@@ -17,18 +17,14 @@ public class ChangeLangCommand extends Command {
     public ServletResponse execute(HttpServletRequest request, HttpServletResponse response) {
         HttpSession session = request.getSession();
         System.out.println(request.getHeader("referer"));
-        if(request.getParameter("lang") != null || !request.getParameter("lang").isEmpty()){
-            if(request.getParameter("lang").equals("en") || request.getParameter("lang").equals("ru")){
-                session.setAttribute("lang", request.getParameter("lang"));
-            }
+        if((request.getParameter("lang") != null || !request.getParameter("lang").isEmpty()) &&
+                (request.getParameter("lang").equals("en") || request.getParameter("lang").equals("ru"))){
+            session.setAttribute("lang", request.getParameter("lang"));
         }
 
-        String wentFromPath = CommandUtil.wentFromPath(request);
-
-
-        ServletResponse servletResponse = new ServletResponse(wentFromPath);
-        servletResponse.setRedirectType(RedirectType.REDIRECT);
-
-        return servletResponse;
+        return new ServletResponse.Builder()
+                .withPath(CommandUtil.wentFromPath(request))
+                .withRedirect(RedirectType.REDIRECT)
+                .build();
     }
 }

@@ -5,6 +5,7 @@ import com.example.demo.RedirectType;
 import com.example.demo.ServletResponse;
 import com.example.demo.db.dao.UserDAO;
 import com.example.demo.db.entities.User;
+import com.example.demo.db.services.serviceImpl.UserService;
 import org.apache.log4j.Logger;
 
 import javax.servlet.http.HttpServletRequest;
@@ -26,7 +27,7 @@ public class BanUserCommand extends Command {
         User user = new UserDAO().findUser(id);
         user.setBanned(ban);
 
-        new UserDAO().updateUser(user);
+        new UserService().update(user);
 
         return new ServletResponse(request.getContextPath() + "/", RedirectType.REDIRECT);
     }
