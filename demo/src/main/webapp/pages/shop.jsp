@@ -43,10 +43,10 @@
             <input type="hidden" name="page" value="1">
             <div class="row">
                 <div class="col-sm-2">
-                    <label for="choice1">Name</label>
-                    <input type="radio" id="choice1" name="sort" value="name"
+                    <label for="choice1">Title</label>
+                    <input type="radio" id="choice1" name="sort" value="title"
                         <c:choose>
-                             <c:when test="${param.sort.equals('name')}">
+                             <c:when test="${param.sort.equals('title')}">
                                 checked
                              </c:when>
                         </c:choose>
@@ -138,6 +138,19 @@
 
         <c:forEach var="item" items="${itemsList}">
             <div class="card col-xl-3 col-lg-5 col-md-8 col-sm-9 m-10-20">
+                <c:if test="${sessionScope.user.roleId == 0}">
+                    <div style="
+                    color: black;
+                    position: absolute;
+                    z-index: 99;
+                    background-color: green;
+                    padding: 2px 10px;
+                    border-radius: 10px;
+                    right: 6px;
+                    top: 5px;
+                "><a href="${pageContext.request.contextPath}/view/admin/edit_item?id=${item.id}" style="color: white">Редактировать</a></div>
+                </c:if>
+
                 <a href="${pageContext.request.contextPath}/view/item?item_id=${item.id}">
                     <img class="card-img-top" src="<c:url value="${item.img}" /> " alt="Card image">
                 </a>

@@ -25,10 +25,6 @@
                     <ul class="navbar-nav text_nav">
                         <li class="nav-item">
                             <a href="${pageContext.request.contextPath}/view/media"><fmt:message key="header.media" /></a>
-<%--                            <form action="view" method="post">--%>
-<%--                                <input type="hidden" name="command" value="media_page">--%>
-<%--                                <input type="submit" class="text_from_input" value="<fmt:message key="header.media" /> ">--%>
-<%--                            </form>--%>
                         </li>
                         <li class="nav-item">
                             <a href="${pageContext.request.contextPath}/view/contacts"><fmt:message key="header.contacts" /></a>
@@ -44,6 +40,12 @@
                             <a href="${pageContext.request.contextPath}/view/press_list"><fmt:message key="header.press" /></a>
                         </li>
 
+                        <c:if test="${sessionScope.user.roleId == 0}">
+                            <li class="nav-item">
+                                <a href="${pageContext.request.contextPath}/view/admin">Admin</a>
+                            </li>
+                        </c:if>
+
                         <c:if test="${empty sessionScope.user}">
                             <li class="nav-item">
                                 <a href="${pageContext.request.contextPath}/view/login"><fmt:message key="header.login" /></a>
@@ -51,7 +53,7 @@
                         </c:if>
                         <c:if test="${not empty sessionScope.user}">
                             <li class="nav-item">
-                                <a href="${pageContext.request.contextPath}/view/logout"><fmt:message key="header.logout" /></a>
+                                <a href="${pageContext.request.contextPath}/view/user"><fmt:message key="header.cabinet" /></a>
                             </li>
                         </c:if>
                         <li class="nav-item">

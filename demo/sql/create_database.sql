@@ -21,7 +21,7 @@ CREATE TABLE categories(
     category VARCHAR(120) NOT NULL UNIQUE
 );
 
-INSERT INTO categories(category) VALUES ('dress');
+INSERT INTO categories(category) VALUES ('clothes');
 INSERT INTO categories(category) VALUES ('music');
 INSERT INTO categories(category) VALUES ('other');
 
@@ -30,10 +30,9 @@ create table status(
     name VARCHAR(60) NOT NULL
 );
 
-INSERT INTO status(id, name) VALUES (1, 'opened');
-INSERT INTO status(id, name) VALUES (2, 'payed');
-INSERT INTO status(id, name) VALUES (3, 'delivered');
-INSERT INTO status(id, name) VALUES (4, 'closed');
+INSERT INTO status(id, name) VALUES (1, 'registered');
+INSERT INTO status(id, name) VALUES (2, 'paid');
+INSERT INTO status(id, name) VALUES (3, 'canceled');
 
 create TABLE users(
       id INTEGER NOT NULL PRIMARY KEY AUTO_INCREMENT,
@@ -44,11 +43,12 @@ create TABLE users(
       address VARCHAR(255) NOT NULL ,
       city VARCHAR(120) NOT NULL ,
       country_id INTEGER NOT NULL REFERENCES country(id),
-      role_id int not null DEFAULT 1 REFERENCES role(id)
+      role_id int not null DEFAULT 1 REFERENCES role(id),
+      banned integer not null DEFAULT 0
 );
 
 INSERT INTO users(first_name, second_name, address, city, country_id, email, pass, role_id)
-VALUES ('Ruslan', 'Humeniuk', 'Pushkina 2', 'Vynnitsia', 1, 'ruslan21343@gmail.com', '123', 1);
+VALUES ('Ruslan', 'Humeniuk', 'Pushkina 2', 'Vynnitsia', 1, 'ruslan21343@gmail.com', '123', 0);
 
 INSERT INTO users(first_name, second_name, address, city, country_id, email, pass, role_id)
 VALUES ('Vasya', 'Pupochkin', 'Vinni Puha 32', 'Vynnitsia', 3, 'Vinni@ukr.net', 'pass', 1);
@@ -62,7 +62,8 @@ CREATE TABLE items(
       price FLOAT(2) NOT NULL ,
       count INTEGER NOT NULL ,
       img text NOT NULL,
-      category_id INTEGER NOT NULL REFERENCES categories(id)
+      category_id INTEGER NOT NULL REFERENCES categories(id),
+      disable INTEGER NOT NULL DEFAULT 0
 );
 
 INSERT INTO items(title, description, price, count, img)
@@ -74,17 +75,11 @@ VALUES ('Fish', 'There is a fish', 12.2, 100, '/img/photo2.png', 1);
 INSERT INTO items(title, description, price, count, img)
 VALUES ('Phone', 'There is a phone', 200, 100, '/img/photo3.png', 2);
 
-CREATE TABLE good(
-     item_id INTEGER NOT NULL REFERENCES items(id),
-     user_id INTEGER NOT NULL REFERENCES users(id),
-     quantity INTEGER NOT NULL
-);
 
 CREATE TABLE delivery_type(
       id INTEGER NOT NULL PRIMARY KEY,
       type VARCHAR(120) not null UNIQUE
 );
-
 
 INSERT INTO delivery_type(id, type) VALUES (1, 'Nova poshta');
 INSERT INTO delivery_type(id, type) VALUES (2, 'Ukr poshta');
@@ -106,11 +101,6 @@ CREATE TABLE orders(
        item_id INTEGER NOT NULL REFERENCES items(id),
        order_id INTEGER NOT NULL REFERENCES order_list(id),
        quantity INTEGER NOT NULL
-);
-
-CREATE TABLE orders_users(
-        user_id INTEGER NOT NULL REFERENCES users(id),
-        order_id INTEGER NOT NULL REFERENCES order_list(id)
 );
 
 create table contact_messages(

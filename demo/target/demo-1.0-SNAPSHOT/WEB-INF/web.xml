@@ -56,6 +56,24 @@
         <url-pattern>/*</url-pattern>
     </filter-mapping>
 
+    <filter>
+        <filter-name>UserPanelFilter</filter-name>
+        <filter-class>com.example.demo.filter.UserPanelFilter</filter-class>
+    </filter>
+    <filter-mapping>
+        <filter-name>UserPanelFilter</filter-name>
+        <url-pattern>/view/user</url-pattern>
+    </filter-mapping>
+
+    <filter>
+        <filter-name>AdminPanelAccess</filter-name>
+        <filter-class>com.example.demo.filter.AdminAccessFilter</filter-class>
+    </filter>
+    <filter-mapping>
+        <filter-name>AdminPanelAccess</filter-name>
+        <url-pattern>/view/admin/*</url-pattern>
+    </filter-mapping>
+
 <!--    <filter>-->
 <!--        <filter-name>EncodingFilter</filter-name>-->
 <!--        <filter-class>com.example.demo.filter.EncodingFilter</filter-class>-->

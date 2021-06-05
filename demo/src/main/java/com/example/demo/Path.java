@@ -1,6 +1,11 @@
 package com.example.demo;
 
+import javax.servlet.http.HttpServletRequest;
+
 public enum Path {
+    ADMIN_PANEL_URL("/view/admin"),
+    SHOP_PAGE_URL("/view/shop"),
+
     PAGE__ERROR_PAGE("/pages/error_page.jsp"),
     MAIN_PAGE("/"),
     REGISTER_PAGE("/pages/register.jsp"),
@@ -17,9 +22,14 @@ public enum Path {
     NOT_FOUND("/pages/404.jsp"),
     ITEM_PAGE("/pages/item.jsp"),
     CART_PAGE("/pages/cart.jsp"),
-    ORDER_PAGE("/pages/order.jsp");
+    ORDER_PAGE("/pages/make_order.jsp"),
+    ADMIN_ORDERS("/pages/admin_panel_orders.jsp"),
+    ADMIN_USERS("/pages/admin_panel_users.jsp"),
+    EDIT_ITEM_PAGE("/pages/edit_item.jsp"),
+    ADD_ITEM_PAGE("/pages/add_item.jsp"),
+    USER_PAGE("/pages/user_panel.jsp");
 
-    String value;
+    private String value;
 
     public String getValue() {
         return value;
@@ -32,5 +42,18 @@ public enum Path {
     @Override
     public String toString() {
         return value;
+    }
+
+    public static String getStaticPath(HttpServletRequest request){
+        StringBuffer path = request.getRequestURL();
+        if(path.indexOf("/view") == -1)
+            if(path.toString().contains("/"))
+                return path.substring(0, path.indexOf("/"));
+            else
+                return path.toString();
+
+        else{
+            return path.substring(0, path.indexOf("/view"));
+        }
     }
 }

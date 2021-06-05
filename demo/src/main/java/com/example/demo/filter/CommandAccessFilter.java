@@ -17,7 +17,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import com.example.demo.Path;
-import db.Role;
+import com.example.demo.db.Role;
 import org.apache.log4j.Logger;
 
 /**

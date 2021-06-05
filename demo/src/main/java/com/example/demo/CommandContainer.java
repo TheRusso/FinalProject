@@ -1,8 +1,11 @@
 package com.example.demo;
 
+import com.example.demo.controllers.*;
+import com.example.demo.controllers.open_view.*;
+import org.apache.log4j.Logger;
+
 import java.util.Map;
 import java.util.TreeMap;
-import java.util.logging.Logger;
 
 public class CommandContainer {
     private static final Logger log = Logger.getLogger(CommandContainer.class.getName());
@@ -26,11 +29,27 @@ public class CommandContainer {
         commands.put("item", new OpenItemCommand());
         commands.put("cart_actions", new CartCommand());
         commands.put("cart", new OpenCartCommand());
+        commands.put("order", new OpenOrderCommand());
+        commands.put("make_order", new MakeOrderCommand());
+        commands.put("update_quantity", new AjaxUpdateQuantityCommand());
+        commands.put("user", new UserPanelCommand());
+        commands.put("update_status", new ChangeStatusCommand());
+        commands.put("admin", new OpenAdminOrdersCommand());
+        commands.put("admin/orders", new OpenAdminOrdersCommand());
+        commands.put("admin/users", new OpenAdminUsersCommand());
+        commands.put("admin/edit_item", new OpenEditItemCommand());
+        commands.put("update_role", new ChangeUserRoleCommand());
+        commands.put("ban_user", new BanUserCommand());
+        commands.put("admin/edit_item_command", new EditItemCommand());
+        commands.put("admin/delete_item", new DeleteItemCommand());
+        commands.put("admin/add_item", new OpenAddItemPageCommand());
+        commands.put("admin/add_item_command", new AddItemCommand());
+        commands.put("add_item_command", new AddItemCommand());
     }
 
     public static Command get(String commandName){
         if(commandName == null || !commands.containsKey(commandName)){
-            log.severe("Command not found, name --> " + commandName);
+            log.info("Command not found, name --> " + commandName);
             return commands.get("noCommand");
         }
 

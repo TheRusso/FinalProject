@@ -15,6 +15,14 @@ body{
     color: white!important;
 }
 
+select{
+    color: black;
+}
+
+select *{
+    color: black;
+}
+
 a:hover{
     text-decoration: none;
 }

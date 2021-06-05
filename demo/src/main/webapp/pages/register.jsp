@@ -22,7 +22,7 @@
                 </div>
             </div>
             <div class="info-form">
-                <form action="view" class="justify-content-center" method="post">
+                <form action="${pageContext.request.contextPath}/view" class="justify-content-center" method="post">
                     <input type="hidden" name="command" value="insert_user">
                     <div class="form-group">
                         <label for="exampleInputEmail1"><fmt:message key="register.email" /> </label>
