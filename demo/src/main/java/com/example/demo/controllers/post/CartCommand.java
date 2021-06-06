@@ -21,7 +21,7 @@ public class CartCommand extends Command {
 
         logger.info("Command starts");
 
-        servletResponse = new CartService().doAction(request, servletResponse);
+        servletResponse = new CartService().doAction(request);
 
         logger.info("The action have done his work");
 

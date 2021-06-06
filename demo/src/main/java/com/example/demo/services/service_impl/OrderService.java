@@ -1,4 +1,4 @@
-package com.example.demo.services.serviceImpl;
+package com.example.demo.services.service_impl;
 
 import com.example.demo.db.dao.OrderDAO;
 import com.example.demo.db.entities.Order;
@@ -11,7 +11,7 @@ import javax.servlet.http.HttpSession;
 import java.util.*;
 
 public class OrderService implements ServiceEntity<Order> {
-    private Logger logger = Logger.getLogger(OrderService.class.getName());
+    private final Logger logger = Logger.getLogger(OrderService.class.getName());
 
     private final OrderDAO orderDAO = new OrderDAO();
 
@@ -42,10 +42,10 @@ public class OrderService implements ServiceEntity<Order> {
         Map<Long, Integer> items = new HashMap<>();
 
         HttpSession session = request.getSession();
-        Enumeration attributeNames = session.getAttributeNames();
+        Enumeration<String> attributeNames = session.getAttributeNames();
 
         while (attributeNames.hasMoreElements()){
-            String attribute = attributeNames.nextElement().toString();
+            String attribute = attributeNames.nextElement();
             if(cartUtil.isValid(attribute)){
                 items.put(cartUtil.getIdSuffix(attribute), Integer.parseInt(session.getAttribute(attribute).toString()));
             }

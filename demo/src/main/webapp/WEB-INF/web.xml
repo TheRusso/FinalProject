@@ -38,12 +38,12 @@
     </servlet-mapping>
 
 <!--    <error-page>-->
-<!--        <error-code>404</error-code>-->
-<!--        <location>/pages/404.jsp</location>-->
+<!--        <location>/pages/error_page.jsp</location>-->
 <!--    </error-page>-->
 
 <!--    <error-page>-->
-<!--        <location>/pages/error_page.jsp</location>-->
+<!--        <error-code>404</error-code>-->
+<!--        <location>/pages/errors/404.jsp</location>-->
 <!--    </error-page>-->
 
 
@@ -74,19 +74,17 @@
         <url-pattern>/view/admin/*</url-pattern>
     </filter-mapping>
 
-<!--    <filter>-->
-<!--        <filter-name>EncodingFilter</filter-name>-->
-<!--        <filter-class>com.example.demo.filter.EncodingFilter</filter-class>-->
-<!--        <init-param>-->
-<!--            <param-name>encoding</param-name>-->
-<!--            <param-value>UTF-8</param-value>-->
-<!--        </init-param>-->
-<!--    </filter>-->
-
-<!--    <filter-mapping>-->
-<!--        <filter-name>EncodingFilter</filter-name>-->
-<!--        <url-pattern>/pages/*</url-pattern>-->
-<!--        <servlet-name>Controller</servlet-name>-->
-<!--    </filter-mapping>-->
+    <filter>
+        <filter-name>PostMethodFilter</filter-name>
+        <filter-class>com.example.demo.filter.PostFilter</filter-class>
+    </filter>
+    <filter-mapping>
+        <filter-name>PostMethodFilter</filter-name>
+        <url-pattern>/view/enter</url-pattern>
+    </filter-mapping>
+    <filter-mapping>
+        <filter-name>PostMethodFilter</filter-name>
+        <url-pattern>/view/insert_user</url-pattern>
+    </filter-mapping>
 
 </web-app>

@@ -60,20 +60,44 @@ CREATE TABLE items(
       title VARCHAR(255) NOT NULL ,
       description TEXT,
       price FLOAT(2) NOT NULL ,
-      count INTEGER NOT NULL ,
       img text NOT NULL,
       category_id INTEGER NOT NULL REFERENCES categories(id),
       disable INTEGER NOT NULL DEFAULT 0
 );
 
-INSERT INTO items(title, description, price, count, img)
-VALUES ('Milk', 'There is a cup of milk', 22.5, 20, '/img/photo1.png', 1);
+INSERT INTO items(title, description, price, img, category_id)
+VALUES ('Motanka T-Shirt', 'Very cool motanka t-shirt', 22.5, '/items/img/ref.jpg', 1);
 
-INSERT INTO items(title, description, price, count, img)
-VALUES ('Fish', 'There is a fish', 12.2, 100, '/img/photo2.png', 1);
+INSERT INTO items(title, description, price, img, category_id)
+VALUES ('SOLSTAFIR', 'ENDLESS TWILIGHT OF CODEPENDENT LOVE - CLEAR BLACK MARBLED 2-VINYL', 16.99, '/items/img/asd.jpg', 2);
 
-INSERT INTO items(title, description, price, count, img)
-VALUES ('Phone', 'There is a phone', 200, 100, '/img/photo3.png', 2);
+INSERT INTO items(title, description, price, img, category_id)
+VALUES ('POWERWOLF', 'CALL OF THE WILD - MEDIABOOK 2-CD', 24.99, '/items/img/pawerwolfcd.png', 2);
+
+INSERT INTO items(title, description, price, img, category_id)
+VALUES ('APOPHIS', 'EXCESS - SCHWARZES VINYL', 23.99, '/items/img/apophisvinyl.png', 2);
+
+INSERT INTO items(title, description, price, img, category_id)
+VALUES ('TOOL', 'THE TORCH - T-SHIRT', 19.99, '/items/img/tool.jpg', 1);
+
+INSERT INTO items(title, description, price, img, category_id)
+VALUES ('PINK FLOYD', 'DSOTM ESCHER - T-SHIRT', 19.99, '/items/img/pinkfloyd.jpg', 1);
+
+INSERT INTO items(title, description, price, img, category_id)
+VALUES ('Bon Jovi vinyl', 'Bon Jovi - Bon Jovi 2020 - Vinyl LP', 34.99, '/items/img/bon.jpg', 2);
+
+INSERT INTO items(title, description, price, img, category_id)
+VALUES ('Lynyrd Skynyrd', 'Lynyrd Skynyrd - (Pronounced ''Leh-''Nerd ''skin-''Nerd) - Vinyl LP
+- Track List: 1. I Ain''t the One 2. Tuesday''s Gone 3.
+Gimme Three Steps 4. Simple Man 5. Things Goin'' on 6.
+Mississippi Kid 7. Poison Whiskey 8. Free Bird', 28.99, '/items/img/lynyrd.jpg', 2);
+
+INSERT INTO items(title, description, price, img, category_id)
+VALUES ('Nirvana poster', 'Poster', 8.99, '/items/img/nirvana.jpg', 3);
+
+INSERT INTO items(title, description, price, img, category_id)
+VALUES ('Jimi Hendrix poster', 'Poster', 8.99, '/items/img/jimi.png', 3);
+
 
 
 CREATE TABLE delivery_type(

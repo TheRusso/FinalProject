@@ -5,7 +5,7 @@ import com.example.demo.controllers.RedirectType;
 import com.example.demo.controllers.ServletResponse;
 import com.example.demo.db.dao.UserDAO;
 import com.example.demo.db.entities.User;
-import com.example.demo.services.serviceImpl.UserService;
+import com.example.demo.services.service_impl.UserService;
 import org.apache.log4j.Logger;
 
 import javax.servlet.http.HttpServletRequest;

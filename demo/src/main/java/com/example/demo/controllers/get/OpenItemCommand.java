@@ -4,8 +4,7 @@ import com.example.demo.controllers.Command;
 import com.example.demo.controllers.Path;
 import com.example.demo.controllers.ServletResponse;
 import com.example.demo.db.entities.Item;
-import com.example.demo.services.serviceImpl.ItemService;
-import com.example.demo.utils.Configuration;
+import com.example.demo.services.service_impl.ItemService;
 import com.example.demo.utils.ErrorPropNamesHandler;
 import com.example.demo.utils.ErrorUtil;
 

@@ -4,7 +4,6 @@ import com.example.demo.controllers.CommandUtil;
 import com.example.demo.controllers.Path;
 import com.example.demo.controllers.RedirectType;
 import com.example.demo.controllers.ServletResponse;
-import com.example.demo.utils.Configuration;
 import com.example.demo.utils.ErrorPropNamesHandler;
 import com.example.demo.utils.ErrorUtil;
 
@@ -14,39 +13,41 @@ import javax.servlet.http.HttpSession;
 public class CartService {
     private final String ACTION = "action";
 
-    public ServletResponse doAction(HttpServletRequest request,
-                                    ServletResponse servletResponse){
-        if(request.getParameter(ACTION) != null){
+    public ServletResponse doAction(HttpServletRequest request){
+        ServletResponse servletResponse;
 
-            switch (request.getParameter(ACTION)) {
-                case "add":
-                    servletResponse = addToCart(request);
-                    break;
-                case "delete":
-                    servletResponse = deleteFromCart(request);
-                    break;
-                case "order":
-                    servletResponse = new ServletResponse();
-                    HttpSession session = request.getSession();
+        switch (request.getParameter(ACTION)) {
+            case "add":
+                servletResponse = addToCart(request);
+                break;
 
-                    if (session.getAttribute("user") != null) {
-                        servletResponse.setPath(Path.ORDER_PAGE.getValue());
-                    } else {
-                        servletResponse.setPath(request.getContextPath() + "/view/login?to=order");
-                    }
+            case "delete":
+                servletResponse = deleteFromCart(request);
+                break;
 
-                    servletResponse.setRedirectType(RedirectType.REDIRECT);
-                    break;
-                default:
-                    ErrorUtil.printErrorMessage(ErrorPropNamesHandler.WRONG_URL, request);
-                    return new ServletResponse.Builder()
-                            .withPath(Path.PAGE_ERROR_PAGE.getValue())
-                            .build();
-            }
+            case "order":
+                servletResponse = cartOption(request);
+                break;
 
-        }else{
-            ErrorUtil.printErrorMessage(ErrorPropNamesHandler.WRONG_URL, request);
+            default:
+                ErrorUtil.printErrorMessage(ErrorPropNamesHandler.WRONG_URL, request);
+                return new ServletResponse.Builder()
+                        .withPath(Path.PAGE_ERROR_PAGE.getValue())
+                        .build();
         }
+
+        return servletResponse;
+    }
+
+    private ServletResponse cartOption(HttpServletRequest request){
+        ServletResponse servletResponse = new ServletResponse();
+
+        if (request.getSession().getAttribute("user") != null)
+            servletResponse.setPath(Path.ORDER_PAGE.getValue());
+        else
+            servletResponse.setPath(request.getContextPath() + "/view/login?to=order");
+
+        servletResponse.setRedirectType(RedirectType.REDIRECT);
 
         return servletResponse;
     }

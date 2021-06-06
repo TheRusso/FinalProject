@@ -4,7 +4,7 @@ import com.example.demo.controllers.Command;
 import com.example.demo.controllers.Path;
 import com.example.demo.controllers.ServletResponse;
 import com.example.demo.db.bean.UsersBean;
-import com.example.demo.services.serviceImpl.UserService;
+import com.example.demo.services.service_impl.UserService;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;

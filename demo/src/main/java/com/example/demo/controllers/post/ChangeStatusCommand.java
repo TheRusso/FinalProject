@@ -2,7 +2,7 @@ package com.example.demo.controllers.post;
 
 import com.example.demo.controllers.Command;
 import com.example.demo.controllers.ServletResponse;
-import com.example.demo.services.serviceImpl.OrderService;
+import com.example.demo.services.service_impl.OrderService;
 import org.apache.log4j.Logger;
 
 import javax.servlet.http.HttpServletRequest;

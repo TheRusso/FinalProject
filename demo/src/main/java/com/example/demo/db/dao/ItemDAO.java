@@ -145,7 +145,7 @@ public class ItemDAO {
      * @return count of pages
      */
     public int countOfPages(String sortBy, String order, List<String> categories){
-        return countOfItems(sortBy, order, categories) / itemsPerPage;
+        return (int)Math.ceil((double) countOfItems(sortBy, order, categories) / itemsPerPage);
     }
 
     /**
@@ -170,6 +170,7 @@ public class ItemDAO {
 
 
             String sql = ShopChooseQuery.getCountSQL(sortBy, order, categories);
+            logger.info("Sql for count of pages: " + sql);
             statement = connection.createStatement();
 
             resultSet = statement.executeQuery(sql);
@@ -331,7 +332,6 @@ public class ItemDAO {
                 item.setTitle(rs.getString(Fields.ITEM_TITLE));
                 item.setDescription(rs.getString(Fields.ITEM_DESCRIPTION));
                 item.setPrice(rs.getFloat(Fields.ITEM_PRICE));
-                item.setCount(rs.getInt(Fields.ITEM_COUNT));
                 item.setImg(rs.getString(Fields.ITEM_IMG));
                 item.setImg(rs.getString(Fields.ITEM_IMG));
                 item.setDisable(rs.getInt(Fields.ITEM_DISABLE));

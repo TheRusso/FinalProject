@@ -3,7 +3,7 @@ package com.example.demo.controllers.post;
 
 import com.example.demo.controllers.Command;
 import com.example.demo.controllers.ServletResponse;
-import com.example.demo.services.serviceImpl.UserService;
+import com.example.demo.services.service_impl.UserService;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;

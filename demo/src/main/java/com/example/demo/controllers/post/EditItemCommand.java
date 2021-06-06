@@ -6,7 +6,7 @@ import com.example.demo.controllers.RedirectType;
 import com.example.demo.controllers.ServletResponse;
 import com.example.demo.db.dao.ItemDAO;
 import com.example.demo.db.entities.Item;
-import com.example.demo.services.serviceImpl.ItemService;
+import com.example.demo.services.service_impl.ItemService;
 import org.apache.log4j.Logger;
 
 import javax.servlet.http.HttpServletRequest;
