@@ -24,9 +24,9 @@
         $.ajax({
             async: false,
             type: "POST",
-            url: ${pageContext.request.contextPath} + '/view',
+            url: "/view/update_quantity",
             data_type: 'text',
-            data: 'command=update_quantity&id=' + id + '&quantity=' + val
+            data: 'id=' + id + '&quantity=' + val
         });
     }
 
@@ -39,7 +39,7 @@
         $.ajax({
             async: false,
             type: "POST",
-            url: ${pageContext.request.contextPath} + '/view',
+            url: "/view/cart_actions",
             data_type: 'text',
             data: 'command=cart_actions&action=delete&id=' + id,
             error: function (){

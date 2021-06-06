@@ -7,6 +7,8 @@ import com.example.demo.controllers.ServletResponse;
 import com.example.demo.db.entities.User;
 import com.example.demo.services.serviceImpl.UserService;
 import com.example.demo.utils.Configuration;
+import com.example.demo.utils.ErrorPropNamesHandler;
+import com.example.demo.utils.ErrorUtil;
 import org.apache.log4j.Logger;
 
 import javax.servlet.http.HttpServletRequest;
@@ -30,9 +32,9 @@ public class RegisterUserCommand extends Command {
                     request.getParameter("email").isEmpty()){
 
                 logger.warn("Invalid data");
-                request.setAttribute("errorMessage", Configuration.getInstance().getErrorMessage("dataValidationError"));
+                ErrorUtil.printErrorMessage(ErrorPropNamesHandler.DATA_VALIDATION_ERROR, request);
 
-                return new ServletResponse(Path.PAGE__ERROR_PAGE.getValue());
+                return new ServletResponse(Path.PAGE_ERROR_PAGE.getValue());
             }
 
             logger.info("Valid data");
@@ -60,16 +62,16 @@ public class RegisterUserCommand extends Command {
             }else{
                 logger.warn("The user have not been registered");
 
-                request.setAttribute("errorMessage", Configuration.getInstance().getErrorMessage("saveNewUserErr"));
+                ErrorUtil.printErrorMessage(ErrorPropNamesHandler.SAVE_NEW_USER_ERROR, request);
 
-                return new ServletResponse(Path.PAGE__ERROR_PAGE.getValue());
+                return new ServletResponse(Path.PAGE_ERROR_PAGE.getValue());
             }
 
         }else{
             logger.warn("GET method, so we threw an exception");
-            request.setAttribute("errorMessage", Configuration.getInstance().getErrorMessage("cantFindPage"));
+            ErrorUtil.printErrorMessage(ErrorPropNamesHandler.CANT_FIND_PAGE, request);
 
-            return new ServletResponse(Path.PAGE__ERROR_PAGE.getValue());
+            return new ServletResponse(Path.PAGE_ERROR_PAGE.getValue());
         }
     }
 

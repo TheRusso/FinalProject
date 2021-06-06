@@ -15,9 +15,9 @@
         $.ajax({
             async: false,
             type: "POST",
-            url: ${pageContext.request.contextPath} + '/view',
+            url: "/view/update_status",
             data_type: 'text',
-            data: 'command=update_status&order_id=' + orderId + '&status_id=' + statusId
+            data: 'order_id=' + orderId + '&status_id=' + statusId
         });
     }
 </script>

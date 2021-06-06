@@ -4,6 +4,8 @@ import com.example.demo.utils.Configuration;
 import com.example.demo.controllers.Path;
 import com.example.demo.db.Role;
 import com.example.demo.db.entities.User;
+import com.example.demo.utils.ErrorPropNamesHandler;
+import com.example.demo.utils.ErrorUtil;
 import org.apache.log4j.Logger;
 
 import javax.servlet.*;
@@ -49,14 +51,11 @@ public class AdminAccessFilter implements Filter {
     }
 
     private void openErrorPage(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        String errorMessage;
-
-        errorMessage = Configuration.getInstance().getErrorMessage("cantFindPage");
-        request.setAttribute("errorMessage", errorMessage);
+        ErrorUtil.printErrorMessage(ErrorPropNamesHandler.CANT_FIND_PAGE, request);
 
         logger.info("Access denied");
 
-        request.getRequestDispatcher(Path.PAGE__ERROR_PAGE.getValue())
+        request.getRequestDispatcher(Path.PAGE_ERROR_PAGE.getValue())
                 .forward(request, response);
     }
 }

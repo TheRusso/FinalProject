@@ -17,9 +17,9 @@
         $.ajax({
             async: false,
             type: "POST",
-            url: ${pageContext.request.contextPath} + '/view',
+            url: "/view/cart_actions",
             data_type: 'text',
-            data: 'command=cart_actions&action=add&id=' + id,
+            data: 'action=add&id=' + id,
             error: function (){
                 alert('Error');
             },
@@ -40,7 +40,7 @@
             <h4 class="text-center" style="color: black">$${shop_item.price}</h4>
             <div class="row text-center">
                 <div class="col-sm-12 text-dark text-center">
-                    <a class="btn btn-primary" style="margin-top: 40px;padding: 10px 20px;color: white;" onclick="addToCart(2)">В ведро</a>
+                    <a class="btn btn-primary" style="margin-top: 40px;padding: 10px 20px;color: white;" onclick="addToCart(${shop_item.id})">В ведро</a>
                 </div>
                 <div class="col-sm-12 text-dark text-center">
                     <a href="/view/cart" style="margin-top: 40px;color: black;text-decoration: underline;/* color: white; */">Ведро</a>

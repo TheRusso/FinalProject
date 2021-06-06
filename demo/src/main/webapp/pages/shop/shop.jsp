@@ -18,9 +18,9 @@
         $.ajax({
             async: false,
             type: "POST",
-            url: ${pageContext.request.contextPath} + '/view',
+            url: "/view/cart_actions",
             data_type: 'text',
-            data: 'command=cart_actions&action=add&id=' + id,
+            data: 'action=add&id=' + id,
             error: function (){
                 alert('Error');
             },
@@ -31,9 +31,10 @@
     }
 </script>
 
+<h1>${pageContext.request.contextPath}</h1>
 <div class="container">
     <div class="container">
-        <img src="{% static 'images/separate_line.png' %}" alt="" class="img-fluid d-block mx-auto">
+        <img src="${pageContext.request.contextPath}/motanka/img/separate_line.png" alt="" class="img-fluid d-block mx-auto">
         <h1 class="display-2 text-center brusnika"><fmt:message key="shop.goods"/></h1>
     </div>
 

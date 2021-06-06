@@ -8,6 +8,9 @@ import com.example.demo.db.bean.UsersBean;
 import com.example.demo.db.dao.UserDAO;
 import com.example.demo.db.entities.User;
 import com.example.demo.services.ServiceEntity;
+import com.example.demo.utils.Configuration;
+import com.example.demo.utils.ErrorPropNamesHandler;
+import com.example.demo.utils.ErrorUtil;
 import org.apache.log4j.Logger;
 
 import javax.servlet.http.HttpServletRequest;
@@ -15,9 +18,9 @@ import javax.servlet.http.HttpSession;
 import java.util.List;
 
 public class UserService implements ServiceEntity<User> {
-    private Logger logger = Logger.getLogger(UserService.class.getName());
+    private final Logger logger = Logger.getLogger(UserService.class.getName());
 
-    private UserDAO userDAO = new UserDAO();
+    private final UserDAO userDAO = new UserDAO();
 
     @Override
     public List<User> findAll() {
@@ -48,7 +51,8 @@ public class UserService implements ServiceEntity<User> {
     }
 
     public ServletResponse logout(HttpServletRequest request){
-        ServletResponse servletResponse = new ServletResponse(Path.NOT_FOUND.getValue());
+        ErrorUtil.printErrorMessage(ErrorPropNamesHandler.CANT_FIND_PAGE, request);
+        ServletResponse servletResponse = new ServletResponse(Path.PAGE_ERROR_PAGE.getValue());
 
         HttpSession session = request.getSession();
         if(session.getAttribute("user") != null){
@@ -62,7 +66,7 @@ public class UserService implements ServiceEntity<User> {
     }
 
     public ServletResponse loginUser(HttpServletRequest request){
-        ServletResponse servletResponse = new ServletResponse(Path.NOT_FOUND.getValue());
+        ServletResponse servletResponse = new ServletResponse(Path.PAGE_ERROR_PAGE.getValue());
 
         if(request.getMethod().equals("POST")){
             HttpSession session = request.getSession();
@@ -75,14 +79,12 @@ public class UserService implements ServiceEntity<User> {
 
 
             //error handler
-            String errorMessage = null;
-            servletResponse.setPath(Path.PAGE__ERROR_PAGE.getValue());
+            servletResponse.setPath(Path.PAGE_ERROR_PAGE.getValue());
             servletResponse.setRedirectType(RedirectType.FORWARD);
 
             if(email == null || password == null || email.isEmpty() || password.isEmpty()){
-                errorMessage = "Login/Password cannot be empty";
-                request.setAttribute("errorMessage", errorMessage);
-                logger.warn("errorMessage --> " + errorMessage);
+                ErrorUtil.printErrorMessage(ErrorPropNamesHandler.EMPTY_LOGIN_FORM, request);
+                logger.warn("errorMessage --> " + Configuration.getInstance().getErrorMessage(ErrorPropNamesHandler.EMPTY_LOGIN_FORM.getPropName()));
                 return servletResponse;
             }
 
@@ -91,9 +93,8 @@ public class UserService implements ServiceEntity<User> {
             logger.info("Found in DB: user --> " + user);
 
             if(user == null || !password.equals(user.getPass()) || user.getBanned() == 1) {
-                errorMessage = "Cannot find user with such login/password";
-                request.setAttribute("errorMessage", errorMessage);
-                logger.info("errorMessage --> " + errorMessage);
+                ErrorUtil.printErrorMessage(ErrorPropNamesHandler.CANT_FIND_USER, request);
+                logger.info("errorMessage --> " + Configuration.getInstance().getErrorMessage(ErrorPropNamesHandler.CANT_FIND_USER.getPropName()));
                 return servletResponse;
             }else {
                 Role userRole = Role.getRole(user);

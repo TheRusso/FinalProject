@@ -33,8 +33,8 @@
                     </div>
 
                     <div class="form-group">
-                        <label>Price</label>
-                        <input type="number" class="form-control" name="price" value="${item.price}" placeholder="Price" required>
+                        <label>Price (Format 000.00)</label>
+                        <input type="text" pattern="[\d]+.[\d]{0,2}"  class="form-control" name="price" value="${item.price}" placeholder="Price" required>
                     </div>
 
 <%--                    <div class="form-group">--%>

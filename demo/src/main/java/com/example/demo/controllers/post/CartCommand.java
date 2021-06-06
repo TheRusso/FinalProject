@@ -17,7 +17,7 @@ public class CartCommand extends Command {
         response.setContentType("text/plain");
 
 
-        ServletResponse servletResponse = new ServletResponse(Path.PAGE__ERROR_PAGE.getValue());
+        ServletResponse servletResponse = new ServletResponse(Path.PAGE_ERROR_PAGE.getValue());
 
         logger.info("Command starts");
 

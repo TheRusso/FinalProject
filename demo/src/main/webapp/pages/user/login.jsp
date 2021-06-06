@@ -22,8 +22,7 @@
                 </div>
             </div>
             <div class="info-form">
-                <form action="view" method="post" class="justify-content-center">
-                    <input type="hidden" name="command" value="enter">
+                <form action="${pageContext.request.contextPath}/view/enter" method="post" class="justify-content-center">
                     <input type="hidden" name="to" value="${to}">
                     <div class="form-group">
                         <label for="exampleInputEmail1">Email address</label>

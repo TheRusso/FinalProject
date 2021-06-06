@@ -7,6 +7,8 @@ import com.example.demo.controllers.ServletResponse;
 import com.example.demo.db.dao.ContactsDAO;
 import com.example.demo.db.entities.Message;
 import com.example.demo.utils.Configuration;
+import com.example.demo.utils.ErrorPropNamesHandler;
+import com.example.demo.utils.ErrorUtil;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -16,7 +18,8 @@ import java.util.ResourceBundle;
 public class SendMessageCommand extends Command {
     @Override
     public ServletResponse execute(HttpServletRequest request, HttpServletResponse response) {
-        ServletResponse servletResponse = new ServletResponse(Path.NOT_FOUND.getValue());
+        ErrorUtil.printErrorMessage(ErrorPropNamesHandler.CANT_FIND_PAGE, request);
+        ServletResponse servletResponse = new ServletResponse(Path.PAGE_ERROR_PAGE.getValue());
 
         if(request.getMethod().equals("POST")){
             Message message = getMessageFromRequest(request);
@@ -24,15 +27,11 @@ public class SendMessageCommand extends Command {
             ContactsDAO contactsDAO = new ContactsDAO();
             boolean isInserted = contactsDAO.insertMessage(message);
 
-            Locale locale = Locale.getDefault();
-            ResourceBundle bundle = ResourceBundle.getBundle("errors", locale);
-
-
-            request.setAttribute("errorMessage", bundle.getString("dataValidationError"));
+            ErrorUtil.printErrorMessage(ErrorPropNamesHandler.DATA_VALIDATION_ERROR, request);
 
             if(!isInserted){
-                servletResponse.setPath(Path.PAGE__ERROR_PAGE.getValue());
-                request.setAttribute("errorMessage", Configuration.getInstance().getErrorMessage("dataValidationError"));
+                servletResponse.setPath(Path.PAGE_ERROR_PAGE.getValue());
+                ErrorUtil.printErrorMessage(ErrorPropNamesHandler.DATA_VALIDATION_ERROR, request);
                 return servletResponse;
             }
 

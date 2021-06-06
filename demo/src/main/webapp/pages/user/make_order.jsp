@@ -31,7 +31,7 @@
                 </div>
             </div>
             <div class="info-form">
-                <form action="${pageContext.request.contextPath}/view/make_order" class="justify-content-center" style="padding: 30px 0;">
+                <form action="${pageContext.request.contextPath}/view/make_order" method="post" class="justify-content-center" style="padding: 30px 0;">
                     <div class="form-group">
                         <label>Country</label>
                         <select name="country_id">

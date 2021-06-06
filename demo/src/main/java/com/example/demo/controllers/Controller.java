@@ -29,7 +29,7 @@ public class Controller extends HttpServlet {
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        process(req, resp);
+        get(req, resp);
     }
 
 
@@ -59,32 +59,5 @@ public class Controller extends HttpServlet {
             log.info("Redirect address --> " + servletResponse.getPath());
 
         CommandUtil.goToPage(request, response, servletResponse);
-    }
-
-    private void process(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        log.info("Controller starts");
-
-        String commandName = request.getParameter("command");
-        log.info("Request parameter: command --> " + commandName);
-
-        Command command = CommandContainer.get(commandName);
-        log.info("Obtained command --> " + command);
-
-        ServletResponse servletResponse = command.execute(request, response);
-
-        if (servletResponse.getPath() == null){
-            servletResponse.setPath("/");
-            servletResponse.setRedirectType(RedirectType.REDIRECT);
-        }
-
-
-        log.info("Forward address --> " + servletResponse.getPath());
-
-        log.info("Controller finished, now go to forward address --> " + servletResponse.getPath());
-
-        // if the forward address is not null go to the address
-        if (servletResponse.getPath() != null) {
-            CommandUtil.goToPage(request, response, servletResponse);
-        }
     }
 }

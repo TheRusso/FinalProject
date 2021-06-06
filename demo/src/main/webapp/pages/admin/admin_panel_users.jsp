@@ -15,9 +15,9 @@
         $.ajax({
             async: false,
             type: "POST",
-            url: ${pageContext.request.contextPath} + '/view',
+            url: "/view/update_role",
             data_type: 'text',
-            data: 'command=update_role&user_id=' + user_id + '&role_id=' + role_id
+            data: 'user_id=' + user_id + '&role_id=' + role_id
         });
     }
 
@@ -25,9 +25,9 @@
         $.ajax({
             async: false,
             type: "POST",
-            url: ${pageContext.request.contextPath} + '/view',
+            url: '/view/ban_user',
             data_type: 'text',
-            data: 'command=ban_user&user_id=' + user_id + '&ban=' + ban,
+            data: 'user_id=' + user_id + '&ban=' + ban,
             success: function (){
                 alert("Success")
             },

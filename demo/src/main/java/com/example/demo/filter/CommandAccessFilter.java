@@ -18,6 +18,9 @@ import javax.servlet.http.HttpSession;
 
 import com.example.demo.controllers.Path;
 import com.example.demo.db.Role;
+import com.example.demo.utils.Configuration;
+import com.example.demo.utils.ErrorPropNamesHandler;
+import com.example.demo.utils.ErrorUtil;
 import org.apache.log4j.Logger;
 
 /**
@@ -46,12 +49,10 @@ public class CommandAccessFilter implements Filter {
 			log.debug("Filter finished");
 			chain.doFilter(request, response);
 		} else {
-			String errorMessasge = "You do not have permission to access the requested resource";
+			ErrorUtil.printErrorMessage(ErrorPropNamesHandler.PERMISSION_ERROR, (HttpServletRequest) request);
+			log.trace("Set the request attribute: errorMessage --> " + Configuration.getInstance().getErrorMessage(ErrorPropNamesHandler.PERMISSION_ERROR.getPropName()));
 			
-			request.setAttribute("errorMessage", errorMessasge);
-			log.trace("Set the request attribute: errorMessage --> " + errorMessasge);
-			
-			request.getRequestDispatcher(Path.PAGE__ERROR_PAGE.getValue())
+			request.getRequestDispatcher(Path.PAGE_ERROR_PAGE.getValue())
 					.forward(request, response);
 		}
 	}

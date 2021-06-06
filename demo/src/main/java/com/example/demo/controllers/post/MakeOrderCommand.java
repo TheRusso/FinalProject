@@ -9,6 +9,8 @@ import com.example.demo.db.entities.Order;
 import com.example.demo.db.entities.User;
 import com.example.demo.services.serviceImpl.OrderService;
 import com.example.demo.utils.Configuration;
+import com.example.demo.utils.ErrorPropNamesHandler;
+import com.example.demo.utils.ErrorUtil;
 import org.apache.log4j.Logger;
 
 import javax.servlet.http.HttpServletRequest;
@@ -36,10 +38,10 @@ public class MakeOrderCommand extends Command {
         boolean isInserted = new OrderService().makeOrder(order, request);
 
         if(!isInserted){
-            request.setAttribute("errorMessage", Configuration.getInstance().getErrorMessage("wrongURL"));
+            ErrorUtil.printErrorMessage(ErrorPropNamesHandler.WRONG_URL, (HttpServletRequest) request);
 
             return new ServletResponse.Builder()
-                    .withPath(Path.PAGE__ERROR_PAGE.getValue())
+                    .withPath(Path.PAGE_ERROR_PAGE.getValue())
                     .build();
         }
 

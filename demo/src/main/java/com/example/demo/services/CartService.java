@@ -5,6 +5,8 @@ import com.example.demo.controllers.Path;
 import com.example.demo.controllers.RedirectType;
 import com.example.demo.controllers.ServletResponse;
 import com.example.demo.utils.Configuration;
+import com.example.demo.utils.ErrorPropNamesHandler;
+import com.example.demo.utils.ErrorUtil;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
@@ -36,14 +38,14 @@ public class CartService {
                     servletResponse.setRedirectType(RedirectType.REDIRECT);
                     break;
                 default:
-                    request.setAttribute("errorMessage", Configuration.getInstance().getErrorMessage("wrongURL"));
+                    ErrorUtil.printErrorMessage(ErrorPropNamesHandler.WRONG_URL, request);
                     return new ServletResponse.Builder()
-                            .withPath(Path.PAGE__ERROR_PAGE.getValue())
+                            .withPath(Path.PAGE_ERROR_PAGE.getValue())
                             .build();
             }
 
         }else{
-            request.setAttribute("errorMessage", Configuration.getInstance().getErrorMessage("wrongURL"));
+            ErrorUtil.printErrorMessage(ErrorPropNamesHandler.WRONG_URL, request);
         }
 
         return servletResponse;
