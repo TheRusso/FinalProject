@@ -243,8 +243,6 @@ V
 &src/main/webapp/pages/success_page.jsp,7\b\7b7113cbd3ecd61d9026724d794b345ff929cb94
 X
 (src/main/webapp/pages/admin/add_item.jsp,4\2\42eb190365154865eaaabe7b058409677c6d1fe7
-b
-2src/main/webapp/pages/admin/admin_panel_orders.jsp,8\2\825b432e02c250391ee7751b3418018b6b336bfc
 a
 1src/main/webapp/pages/admin/admin_panel_users.jsp,5\0\5048d50d3c51b588a27c7a63965945f5effb0106
 l
@@ -319,3 +317,5 @@ W
 'src/main/webapp/pages/motanka/test.html,5\2\529e55490808e284a5fc11825fadd326f2e22f71
 O
 src/main/webapp/WEB-INF/web.xml,2\e\2e22b6edd746fa3dc40ad7276c87c8d87d72a392
+q
+Asrc/main/java/com/example/demo/db/dao/SQLProperyNamesHandler.java,a\8\a835a26c7d6c163042706903ef5eebb56d507457

@@ -44,7 +44,7 @@ public class OrderDAO {
 
             preparedStatement.close();
         } catch (SQLException | IOException exception) {
-            logger.warn(exception.getMessage());
+            logger.error(exception);
         }finally {
             DBManager.getInstance().commitAndClose(connection);
         }
@@ -69,7 +69,7 @@ public class OrderDAO {
             preparedStatement.executeUpdate();
         } catch (SQLException | IOException exception) {
             DBManager.getInstance().rollbackAndClose(connection);
-            logger.warn(exception.getMessage());
+            logger.error(exception);
 
             return false;
         }finally {
@@ -102,7 +102,7 @@ public class OrderDAO {
             preparedStatement.executeUpdate();
         } catch (SQLException | IOException exception) {
             DBManager.getInstance().rollbackAndClose(connection);
-            logger.warn(exception.getMessage());
+            logger.error(exception);
 
             return false;
         }finally {
@@ -151,12 +151,17 @@ public class OrderDAO {
 
             logger.info("User Bean: " + userOrderBeanList);
 
+            Map<Item, Integer> map = new HashMap<>();
+
+            ItemDAO itemDAO = new ItemDAO();
+
+
+
             userOrderBeanList = concatenateUserOrderBean(userOrderBeanList);
 
             logger.info("Concatenated user Bean: " + userOrderBeanList);
 
             connection.close();
-            statement.close();
         } catch (SQLException | IOException exception) {
             exception.printStackTrace();
         }
@@ -206,9 +211,8 @@ public class OrderDAO {
             logger.info("Concatenated user Bean: " + userOrderBeanList);
 
             connection.close();
-            preparedStatement.close();
         } catch (SQLException | IOException exception) {
-            exception.printStackTrace();
+            logger.error(exception);
         }
 
         return userOrderBeanList;
@@ -247,12 +251,12 @@ public class OrderDAO {
 
                     preparedStatement.executeUpdate();
 
-                    DBManager.getInstance().commitAndClose(connection);
+
                     preparedStatement.close();
             }
             logger.info("Successfully added all items to orders");
         } catch (SQLException | IOException exception) {
-            logger.warn(exception.getMessage());
+            logger.error(exception);
             return false;
         }
 
@@ -286,9 +290,9 @@ public class OrderDAO {
                     id = generatedKeys.getLong(1);
             }
 
-            DBManager.getInstance().commitAndClose(connection);
+            connection.commit();
         } catch (SQLException | IOException exception) {
-            logger.warn(exception.getMessage());
+            logger.error(exception);
         }
 
         return id;
@@ -304,13 +308,14 @@ public class OrderDAO {
         Statement stmt = null;
         ResultSet rs = null;
         try {
+            stmt = connection.createStatement();
             OrderMapper mapper = new OrderMapper();
             rs = stmt.executeQuery(DBHandlerUtil.getInstance().getSQL(SQLProperyNamesHandler.SQL__ORDER_FIND_ALL.getPropertyName()));
             while (rs.next())
                 ordersList.add(mapper.mapRow(rs));
         } catch (SQLException | IOException ex) {
             DBManager.getInstance().rollbackAndClose(connection);
-            ex.printStackTrace();
+            logger.error(ex);
         } finally {
             DBManager.getInstance().commitAndClose(connection);
         }
@@ -441,9 +446,9 @@ public class OrderDAO {
                 userOrderBean.setCountry(rs.getString("country"));
                 userOrderBean.setDelivery_type(rs.getString("delivery_type"));
                 userOrderBean.setStatus(rs.getString("status"));
-                Map<Item, Integer> items = new HashMap<>();
-                items.put(new ItemService().findById(rs.getLong("item_id")), rs.getInt("quantity"));
-                userOrderBean.setItems(items);
+                Map<Long, Integer> items = new HashMap<>();
+                items.put(rs.getLong("item_id"), rs.getInt("quantity"));
+                userOrderBean.setPreItems(items);
             } catch (SQLException exception) {
                 exception.printStackTrace();
             }
@@ -475,7 +480,7 @@ public class OrderDAO {
                 result.add(entry.getKey());
                 indexHandler.put(entry.getValue(), index++);
             }else{
-                result.get(indexHandler.get(entry.getValue())).getItems().putAll(entry.getKey().getItems());
+                result.get(indexHandler.get(entry.getValue())).getPreItems().putAll(entry.getKey().getPreItems());
             }
         }
 

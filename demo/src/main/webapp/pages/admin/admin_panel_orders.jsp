@@ -45,9 +45,11 @@
                 </thead>
 
                 <tbody>
+                <c:set var="k" value="0"/>
                 <c:forEach var="item_bean" items="${user_bean}">
+                    <c:set var="k" value="${k + 1}"/>
                     <tr>
-                        <th scope="row">${item_bean.id}</th>
+                        <th scope="row">${k}</th>
                         <td>${item_bean.email}</td>
                         <td>
                                 ${item_bean.address}, <br>

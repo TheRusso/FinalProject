@@ -23,6 +23,7 @@ public class UserOrderBean {
     private String country;
     private String delivery_type;
     private String status;
+    private Map<Long, Integer> preItems = new HashMap<>();
     private Map<Item, Integer> items = new HashMap<>();
 
     public Long getId() {
@@ -79,6 +80,14 @@ public class UserOrderBean {
 
     public void setDelivery_type(String delivery_type) {
         this.delivery_type = delivery_type;
+    }
+
+    public Map<Long, Integer> getPreItems() {
+        return preItems;
+    }
+
+    public void setPreItems(Map<Long, Integer> items) {
+        this.preItems = items;
     }
 
     public Map<Item, Integer> getItems() {

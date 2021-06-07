@@ -102,6 +102,16 @@ public class ItemDAOTest {
     }
 
     @Test
+    public void findBean() throws SQLException {
+        assertNotNull(new OrderDAO().findBeanAllOrders(DBMock.getInstance().getConnection()));
+    }
+
+    @Test
+    public void findBeanForUser() throws SQLException {
+        assertNotNull(new OrderDAO().findBeanForUser(new UserDAO().findUser(1L, DBMock.getInstance().getConnection()), DBMock.getInstance().getConnection()));
+    }
+
+    @Test
     public void findItemsPage() throws SQLException {
         assertEquals(itemList, new ItemDAO().findItemsPage(1, DBMock.getInstance().getConnection()));
     }
