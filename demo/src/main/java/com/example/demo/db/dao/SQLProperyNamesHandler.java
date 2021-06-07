@@ -39,6 +39,10 @@ public enum SQLProperyNamesHandler {
 
     ITEM_COUNT("item.count"),
 
+    ITEM_DELETE("item.delete"),
+
+    ITEM_TRIM_TEST_TABLE("item.trim_test_table"),
+
 
     BEAN_ALL_USERS("bean.all_users_bean"),
 
@@ -46,6 +50,8 @@ public enum SQLProperyNamesHandler {
     USER_FIND_BY_ID("user.find_by_id"),
 
     USER_UPDATE("user.update"),
+
+    USER_DELETE("user.delete"),
 
     USER_INSERT("user.insert"),
 

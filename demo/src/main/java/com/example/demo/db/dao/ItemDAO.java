@@ -28,15 +28,13 @@ public class ItemDAO {
      *
      * @throws SQLException
      */
-    public boolean insertItem(Item item) {
-        Connection connection = null;
-        PreparedStatement preparedStatement = null;
-
+    public boolean insertItem(Item item, Connection connection) {
         logger.info("Start updating user");
-
-        try{
+        try(PreparedStatement preparedStatement =
+                    connection.prepareStatement(
+                            DBHandlerUtil.getInstance().getSQL(
+                                    SQLProperyNamesHandler.ITEM_INSERT.getPropertyName()))){
             connection = DBManager.getInstance().getConnection();
-            preparedStatement = connection.prepareStatement(DBHandlerUtil.getInstance().getSQL(SQLProperyNamesHandler.ITEM_INSERT.getPropertyName()));
 
             preparedStatement.setString(1, item.getTitle());
             preparedStatement.setString(2, item.getDescription());
@@ -61,6 +59,30 @@ public class ItemDAO {
     }
 
     /**
+     * Deletes item with given id
+     *
+     * @param id
+     * @param connection
+     *          DB connection
+     * @return is Deleted
+     */
+    public boolean deleteItem(Long id, Connection connection){
+        try (PreparedStatement preparedStatement =
+                     connection.prepareStatement(DBHandlerUtil.getInstance().getSQL(SQLProperyNamesHandler.ITEM_DELETE.getPropertyName()))){
+
+            preparedStatement.setLong(1, id);
+
+            preparedStatement.executeUpdate();
+        } catch (SQLException | IOException exception) {
+            logger.error(exception);
+
+            return false;
+        }
+
+        return true;
+    }
+
+    /**
      * Updating Item
      *
      * @param item
@@ -69,16 +91,10 @@ public class ItemDAO {
      *
      * @throws SQLException
      */
-    public boolean updateItem(Item item) {
-        Connection connection = null;
-        PreparedStatement preparedStatement = null;
-
+    public boolean updateItem(Item item, Connection connection) {
         logger.info("Start updating user");
 
-        try{
-            connection = DBManager.getInstance().getConnection();
-            preparedStatement = connection.prepareStatement(DBHandlerUtil.getInstance().getSQL(SQLProperyNamesHandler.ITEM_UPDATE.getPropertyName()));
-
+        try(PreparedStatement preparedStatement = connection.prepareStatement(DBHandlerUtil.getInstance().getSQL(SQLProperyNamesHandler.ITEM_UPDATE.getPropertyName()))){
             preparedStatement.setString(1, item.getTitle());
             preparedStatement.setString(2, item.getDescription());
             preparedStatement.setDouble(3, item.getPrice());
@@ -108,14 +124,10 @@ public class ItemDAO {
      * @return Item
      *          Item entity
      */
-    public Item findItemById(Long id){
-        Connection connection = null;
-        PreparedStatement preparedStatement = null;
+    public Item findItemById(Long id, Connection connection){
         Item item = null;
         ResultSet resultSet = null;
-        try{
-            connection = DBManager.getInstance().getConnection();
-            preparedStatement = connection.prepareStatement(DBHandlerUtil.getInstance().getSQL(SQLProperyNamesHandler.ITEM_FIND_BY_ID.getPropertyName()));
+        try(PreparedStatement preparedStatement = connection.prepareStatement(DBHandlerUtil.getInstance().getSQL(SQLProperyNamesHandler.ITEM_FIND_BY_ID.getPropertyName()))){
             preparedStatement.setLong(1, id);
             resultSet = preparedStatement.executeQuery();
             ItemMapper mapper = new ItemMapper();
@@ -144,8 +156,8 @@ public class ItemDAO {
      *          given categories that will be apply to SQL
      * @return count of pages
      */
-    public int countOfPages(String sortBy, String order, List<String> categories){
-        return (int)Math.ceil((double) countOfItems(sortBy, order, categories) / itemsPerPage);
+    public int countOfPages(String sortBy, String order, List<String> categories, Connection connection){
+        return (int)Math.ceil((double) countOfItems(sortBy, order, categories, connection) / itemsPerPage);
     }
 
     /**
@@ -160,15 +172,11 @@ public class ItemDAO {
      *          given categories that will be apply to SQL
      * @return count of items
      */
-    public int countOfItems(String sortBy, String order, List<String> categories){
-        Connection connection = null;
+    public int countOfItems(String sortBy, String order, List<String> categories, Connection connection){
         Statement statement = null;
         ResultSet resultSet = null;
         int count = 0;
         try{
-            connection = DBManager.getInstance().getConnection();
-
-
             String sql = ShopChooseQuery.getCountSQL(sortBy, order, categories);
             logger.info("Sql for count of pages: " + sql);
             statement = connection.createStatement();
@@ -192,13 +200,11 @@ public class ItemDAO {
      *
      * @return count of all items
      */
-    public int countOfItems(){
-        Connection connection = null;
+    public int countOfItems(Connection connection){
         Statement statement = null;
         ResultSet resultSet = null;
         int count = 0;
         try{
-            connection = DBManager.getInstance().getConnection();
             statement = connection.createStatement();
 
             resultSet = statement.executeQuery(DBHandlerUtil.getInstance().getSQL(SQLProperyNamesHandler.ITEM_COUNT.getPropertyName()));
@@ -221,13 +227,11 @@ public class ItemDAO {
      * @param page
      * @return list of Item entity
      */
-    public List<Item> findItemsPage(int page){
-        Connection connection = null;
+    public List<Item> findItemsPage(int page, Connection connection){
         PreparedStatement preparedStatement = null;
         ResultSet resultSet = null;
         List<Item> items = new ArrayList<>();
         try{
-            connection = DBManager.getInstance().getConnection();
             preparedStatement = connection.prepareStatement(DBHandlerUtil.getInstance().getSQL(SQLProperyNamesHandler.ITEM_FIND_FOR_PAGE.getPropertyName()));
             preparedStatement.setInt(1, itemsPerPage * (page - 1));
             preparedStatement.setInt(2, itemsPerPage);
@@ -261,15 +265,14 @@ public class ItemDAO {
      * @return list of Item entities
      *
      */
-    public List<Item> findItemsPage(int page, String sortBy, String order, List<String> categories){
-        Connection connection = null;
+    public List<Item> findItemsPage(int page, String sortBy,
+                                    String order,
+                                    List<String> categories,
+                                    Connection connection){
         PreparedStatement preparedStatement = null;
         ResultSet resultSet = null;
         List<Item> items = new ArrayList<>();
         try{
-            connection = DBManager.getInstance().getConnection();
-
-
             preparedStatement = connection.prepareStatement(ShopChooseQuery.getSQL(sortBy, order, categories));
 
             preparedStatement.setInt(1, itemsPerPage * (page - 1));
@@ -296,14 +299,12 @@ public class ItemDAO {
      *
      * @return list of all item entities
      */
-    public List<Item> findAllItems(){
-        Connection connection = null;
+    public List<Item> findAllItems(Connection connection){
         Statement statement = null;
         ResultSet rs = null;
         List<Item> items = new ArrayList<>();
 
         try{
-            connection = DBManager.getInstance().getConnection();
             statement = connection.createStatement();
             rs = statement.executeQuery(DBHandlerUtil.getInstance().getSQL(SQLProperyNamesHandler.ITEM_FIND_ALL.getPropertyName()));
             ItemMapper mapper = new ItemMapper();

@@ -8,6 +8,7 @@ import com.example.demo.db.bean.UserOrderBean;
 import com.example.demo.db.entities.Item;
 import com.example.demo.db.entities.Order;
 import com.example.demo.db.entities.User;
+import com.example.demo.services.service_impl.ItemService;
 import com.example.demo.utils.DBHandlerUtil;
 import org.apache.log4j.Logger;
 
@@ -19,6 +20,8 @@ public class OrderDAO {
 
     private Logger logger = Logger.getLogger(OrderDAO.class.getName());
 
+
+
     /**
      * Returns order by id
      *
@@ -28,15 +31,10 @@ public class OrderDAO {
      *          Order Entity
      *
      */
-    public Order findOrderById(Long id){
-        Connection connection = null;
-        PreparedStatement preparedStatement = null;
+    public Order findOrderById(Long id, Connection connection){
         ResultSet resultSet = null;
         Order order = null;
-        try{
-            connection = DBManager.getInstance().getConnection();
-            preparedStatement = connection.prepareStatement(DBHandlerUtil.getInstance().getSQL(SQLProperyNamesHandler.ORDER_FIND_BY_ID.getPropertyName()));
-
+        try(PreparedStatement preparedStatement = connection.prepareStatement(DBHandlerUtil.getInstance().getSQL(SQLProperyNamesHandler.ORDER_FIND_BY_ID.getPropertyName()))){
             preparedStatement.setLong(1, id);
 
             resultSet = preparedStatement.executeQuery();
@@ -63,19 +61,12 @@ public class OrderDAO {
      *         id of an status
      * @return is updated or not
      */
-    public boolean updateStatus(Long id, Integer status_id){
-        Connection connection = null;
-        PreparedStatement preparedStatement = null;
-        try{
-            connection = DBManager.getInstance().getConnection();
-            preparedStatement = connection.prepareStatement(DBHandlerUtil.getInstance().getSQL(SQLProperyNamesHandler.SQL__ORDER_UPDATE_STATUS.getPropertyName()));
-
+    public boolean updateStatus(Long id, Integer status_id, Connection connection){
+        try(PreparedStatement preparedStatement = connection.prepareStatement(DBHandlerUtil.getInstance().getSQL(SQLProperyNamesHandler.SQL__ORDER_UPDATE_STATUS.getPropertyName()))){
             preparedStatement.setLong(1, status_id);
             preparedStatement.setLong(2, id);
 
             preparedStatement.executeUpdate();
-
-            preparedStatement.close();
         } catch (SQLException | IOException exception) {
             DBManager.getInstance().rollbackAndClose(connection);
             logger.warn(exception.getMessage());
@@ -97,13 +88,8 @@ public class OrderDAO {
      * @return is updated
      *
      */
-    public boolean update(Order order){
-        Connection connection = null;
-        PreparedStatement preparedStatement = null;
-        try{
-            connection = DBManager.getInstance().getConnection();
-            preparedStatement = connection.prepareStatement(DBHandlerUtil.getInstance().getSQL(SQLProperyNamesHandler.ORDER_UPDATE.getPropertyName()));
-
+    public boolean update(Order order, Connection connection){
+        try(PreparedStatement preparedStatement = connection.prepareStatement(DBHandlerUtil.getInstance().getSQL(SQLProperyNamesHandler.ORDER_UPDATE.getPropertyName()))){
             int k = 0;
             preparedStatement.setLong(++k, order.getUser_id());
             preparedStatement.setString(++k, order.getAddress());
@@ -114,8 +100,6 @@ public class OrderDAO {
             preparedStatement.setLong(++k, order.getId());
 
             preparedStatement.executeUpdate();
-
-            preparedStatement.close();
         } catch (SQLException | IOException exception) {
             DBManager.getInstance().rollbackAndClose(connection);
             logger.warn(exception.getMessage());
@@ -140,8 +124,8 @@ public class OrderDAO {
      *
      * @return is updated or not
      */
-    public boolean updateStatus(Order order, Integer status_id){
-        return updateStatus(order.getId(), status_id);
+    public boolean updateStatus(Order order, Integer status_id, Connection connection){
+        return updateStatus(order.getId(), status_id, connection);
     }
 
     /**
@@ -149,18 +133,13 @@ public class OrderDAO {
      *
      * @return List of UserOrderBean
      */
-    public List<UserOrderBean> findBeanAllOrders(){
-        Connection connection = null;
-        Statement statement = null;
+    public List<UserOrderBean> findBeanAllOrders(Connection connection){
         ResultSet resultSet = null;
 
         List<UserOrderBean> userOrderBeanList = new ArrayList<>();
 
-        try{
+        try(Statement statement = connection.createStatement()){
             logger.info("Start");
-            connection = DBManager.getInstance().getConnection();
-            statement = connection.createStatement();
-
             resultSet = statement.executeQuery(DBHandlerUtil.getInstance().getSQL(SQLProperyNamesHandler.SQL__ORDER_ALL_USERS_BEAN.getPropertyName()));
 
             UserBeanMapper mapper = new UserBeanMapper();
@@ -185,9 +164,9 @@ public class OrderDAO {
         return userOrderBeanList;
     }
 
-    public List<UserOrderBean> findBeanForUser(User user){
+    public List<UserOrderBean> findBeanForUser(User user, Connection connection){
         logger.info("User: " + user);
-        return findBeanForUser(user.getId());
+        return findBeanForUser(user.getId(), connection);
     }
 
     /**
@@ -197,19 +176,15 @@ public class OrderDAO {
      *         user id
      * @return List of UserOrderBean
      */
-    public List<UserOrderBean> findBeanForUser(Long id){
+    public List<UserOrderBean> findBeanForUser(Long id, Connection connection){
         logger.info("Id user: " + id);
 
-        Connection connection = null;
-        PreparedStatement preparedStatement = null;
         ResultSet resultSet = null;
 
         List<UserOrderBean> userOrderBeanList = new ArrayList<>();
 
-        try{
+        try(PreparedStatement preparedStatement = connection.prepareStatement(DBHandlerUtil.getInstance().getSQL(SQLProperyNamesHandler.SQL_ORDER_BEAN__ALL_USERS.getPropertyName()))){
             logger.info("Start");
-            connection = DBManager.getInstance().getConnection();
-            preparedStatement = connection.prepareStatement(DBHandlerUtil.getInstance().getSQL(SQLProperyNamesHandler.SQL_ORDER_BEAN__ALL_USERS.getPropertyName()));
 
             preparedStatement.setLong(1,id);
 
@@ -246,10 +221,10 @@ public class OrderDAO {
      * @return boolean
      *          isInserted or not
      */
-    public boolean makeOrder(Order order){
-        Long id = addOrderList(order);
+    public boolean makeOrder(Order order, Connection connection){
+        Long id = addOrderList(order, connection);
         order.setId(id);
-        return addItemsToOrder(order);
+        return addItemsToOrder(order, connection);
     }
 
     /**
@@ -258,17 +233,13 @@ public class OrderDAO {
      * @param order
      *          Order entity
      */
-    private boolean addItemsToOrder(Order order){
-        Connection connection = null;
-        PreparedStatement preparedStatement = null;
-        try{
+    private boolean addItemsToOrder(Order order, Connection connection){
+        try(PreparedStatement preparedStatement = connection.prepareStatement(DBHandlerUtil.getInstance().getSQL(SQLProperyNamesHandler.SQL__ITEMS_ADD_TO_ORDER.getPropertyName()))){
             logger.info("Start adding an items to orders");
             logger.info(order.getItems());
             for (Map.Entry<Long, Integer> entry:
                  order.getItems().entrySet()) {
                     logger.info(entry);
-                    connection = DBManager.getInstance().getConnection();
-                    preparedStatement = connection.prepareStatement(DBHandlerUtil.getInstance().getSQL(SQLProperyNamesHandler.SQL__ITEMS_ADD_TO_ORDER.getPropertyName()));
 
                     preparedStatement.setLong(1, entry.getKey());
                     preparedStatement.setLong(2, order.getId());
@@ -297,14 +268,10 @@ public class OrderDAO {
      * @return id
      *         Id of inserted order
      */
-    private Long addOrderList(Order order){
-        Long id = -1L;
-        Connection connection = null;
-        PreparedStatement preparedStatement = null;
-        try{
-            connection = DBManager.getInstance().getConnection();
-            preparedStatement = connection.prepareStatement(DBHandlerUtil.getInstance().getSQL(SQLProperyNamesHandler.SQL__ORDER_ADD_TO_ORDER.getPropertyName()),
-                    Statement.RETURN_GENERATED_KEYS);
+    private Long addOrderList(Order order, Connection connection){
+        long id = -1L;
+        try(PreparedStatement preparedStatement = connection.prepareStatement(DBHandlerUtil.getInstance().getSQL(SQLProperyNamesHandler.SQL__ORDER_ADD_TO_ORDER.getPropertyName()),
+                Statement.RETURN_GENERATED_KEYS)){
             preparedStatement.setLong(1, order.getUser_id());
             preparedStatement.setString(2, order.getAddress());
             preparedStatement.setString(3, order.getCity());
@@ -320,7 +287,6 @@ public class OrderDAO {
             }
 
             DBManager.getInstance().commitAndClose(connection);
-            preparedStatement.close();
         } catch (SQLException | IOException exception) {
             logger.warn(exception.getMessage());
         }
@@ -333,23 +299,20 @@ public class OrderDAO {
          *
          * @return List of order entities.
          */
-    public List<Order> findOrders() {
+    public List<Order> findOrders(Connection connection) {
         List<Order> ordersList = new ArrayList<Order>();
         Statement stmt = null;
         ResultSet rs = null;
-        Connection con = null;
         try {
-            con = DBManager.getInstance().getConnection();
             OrderMapper mapper = new OrderMapper();
-            stmt = con.createStatement();
             rs = stmt.executeQuery(DBHandlerUtil.getInstance().getSQL(SQLProperyNamesHandler.SQL__ORDER_FIND_ALL.getPropertyName()));
             while (rs.next())
                 ordersList.add(mapper.mapRow(rs));
         } catch (SQLException | IOException ex) {
-            DBManager.getInstance().rollbackAndClose(con);
+            DBManager.getInstance().rollbackAndClose(connection);
             ex.printStackTrace();
         } finally {
-            DBManager.getInstance().commitAndClose(con);
+            DBManager.getInstance().commitAndClose(connection);
         }
         return ordersList;
     }
@@ -362,24 +325,20 @@ public class OrderDAO {
      *            Status identifier.
      * @return List of order entities.
      */
-    public List<Order> findOrders(int statusId) {
+    public List<Order> findOrders(int statusId, Connection connection) {
         List<Order> ordersList = new ArrayList<Order>();
-        PreparedStatement pstmt = null;
         ResultSet rs = null;
-        Connection con = null;
-        try {
-            con = DBManager.getInstance().getConnection();
+        try(PreparedStatement pstmt = connection.prepareStatement(DBHandlerUtil.getInstance().getSQL(SQLProperyNamesHandler.SQL__ORDER_FIND_BY_STATUS.getPropertyName()))) {
             OrderMapper mapper = new OrderMapper();
-            pstmt = con.prepareStatement(DBHandlerUtil.getInstance().getSQL(SQLProperyNamesHandler.SQL__ORDER_FIND_BY_STATUS.getPropertyName()));
             pstmt.setInt(1, statusId);
             rs = pstmt.executeQuery();
             while (rs.next())
                 ordersList.add(mapper.mapRow(rs));
         } catch (SQLException | IOException ex) {
-            DBManager.getInstance().rollbackAndClose(con);
+            DBManager.getInstance().rollbackAndClose(connection);
             ex.printStackTrace();
         } finally {
-            DBManager.getInstance().commitAndClose(con);
+            DBManager.getInstance().commitAndClose(connection);
         }
         return ordersList;
     }
@@ -392,13 +351,11 @@ public class OrderDAO {
      *
      * @return List of order entities
      */
-    public List<Order> findOrders(String[] ids){
+    public List<Order> findOrders(String[] ids, Connection connection){
         List<Order> orderList = new ArrayList<>();
         Statement statement = null;
         ResultSet rs = null;
-        Connection connection = null;
         try {
-            connection = DBManager.getInstance().getConnection();
             OrderMapper mapper = new OrderMapper();
 
             statement = connection.createStatement();
@@ -423,16 +380,13 @@ public class OrderDAO {
      *            Status identifier.
      * @return List of order entities.
      */
-    public List<Order> findOrders(User user, int statusId){
+    public List<Order> findOrders(User user, int statusId, Connection connection){
         List<Order> ordersList = new ArrayList<>();
         PreparedStatement preparedStatement = null;
         ResultSet rs = null;
-        Connection con = null;
-
         try{
-            con = DBManager.getInstance().getConnection();
             OrderMapper mapper = new OrderMapper();
-            preparedStatement = con.prepareStatement(DBHandlerUtil.getInstance().getSQL(SQLProperyNamesHandler.SQL__ORDER_FIND_BY_STATUS_AND_USER.getPropertyName()));
+            preparedStatement = connection.prepareStatement(DBHandlerUtil.getInstance().getSQL(SQLProperyNamesHandler.SQL__ORDER_FIND_BY_STATUS_AND_USER.getPropertyName()));
             preparedStatement.setInt(1, statusId);
             preparedStatement.setLong(2, user.getId());
             rs = preparedStatement.executeQuery();
@@ -440,10 +394,10 @@ public class OrderDAO {
                 ordersList.add(mapper.mapRow(rs));
             }
         } catch (SQLException | IOException exception) {
-            DBManager.getInstance().rollbackAndClose(con);
+            DBManager.getInstance().rollbackAndClose(connection);
             exception.printStackTrace();
         }finally {
-            DBManager.getInstance().commitAndClose(con);
+            DBManager.getInstance().commitAndClose(connection);
         }
         return ordersList;
     }
@@ -488,7 +442,7 @@ public class OrderDAO {
                 userOrderBean.setDelivery_type(rs.getString("delivery_type"));
                 userOrderBean.setStatus(rs.getString("status"));
                 Map<Item, Integer> items = new HashMap<>();
-                items.put(new ItemDAO().findItemById(rs.getLong("item_id")), rs.getInt("quantity"));
+                items.put(new ItemService().findById(rs.getLong("item_id")), rs.getInt("quantity"));
                 userOrderBean.setItems(items);
             } catch (SQLException exception) {
                 exception.printStackTrace();

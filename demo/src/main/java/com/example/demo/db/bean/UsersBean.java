@@ -9,6 +9,43 @@ public class UsersBean extends Entity {
     private int role_id;
     private int isBanned;
 
+    public static class Builder{
+        private UsersBean usersBean;
+
+        public Builder() {
+            usersBean = new UsersBean();
+        }
+
+        public Builder withFirstName(String name){
+            usersBean.setFirst_name(name);
+            return this;
+        }
+
+        public Builder withSecondName(String name){
+            usersBean.setSecond_name(name);
+            return this;
+        }
+
+        public Builder withEmail(String email){
+            usersBean.setEmail(email);
+            return this;
+        }
+
+        public Builder withRoleId(int id){
+            usersBean.setRole_id(id);
+            return this;
+        }
+
+        public Builder withIsBanned(int id){
+            usersBean.setRole_id(id);
+            return this;
+        }
+
+        public UsersBean build(){
+            return usersBean;
+        }
+    }
+
     public int getIsBanned() {
         return isBanned;
     }

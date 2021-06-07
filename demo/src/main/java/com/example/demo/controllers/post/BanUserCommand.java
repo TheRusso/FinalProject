@@ -20,11 +20,11 @@ public class BanUserCommand extends Command {
 
         Long id = Long.parseLong(request.getParameter("user_id"));
 
-        Integer ban = Integer.parseInt(request.getParameter("ban"));
+        int ban = Integer.parseInt(request.getParameter("ban"));
 
         logger.info(String.format("Change user role: user_id = %s, isBanned = %s", id, ban == 1 ? "yes" : "no"));
 
-        User user = new UserDAO().findUser(id);
+        User user = new UserService().findById(id);
         user.setBanned(ban);
 
         new UserService().update(user);

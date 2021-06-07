@@ -1,5 +1,7 @@
 package com.example.demo.db.entities;
 
+import java.util.Objects;
+
 public class Item extends Entity{
     private String title;
     private String description;
@@ -137,5 +139,18 @@ public class Item extends Entity{
                 ", img='" + img + '\'' +
                 ", quantity=" + quantity +
                 '}';
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Item item = (Item) o;
+        return Float.compare(item.price, price) == 0 && count == item.count && quantity == item.quantity && disable == item.disable && category_id == item.category_id && Objects.equals(title, item.title) && Objects.equals(description, item.description) && Objects.equals(img, item.img);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(title, description, price, count, img, quantity, disable, category_id);
     }
 }

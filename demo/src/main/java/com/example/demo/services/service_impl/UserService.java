@@ -3,6 +3,7 @@ package com.example.demo.services.service_impl;
 import com.example.demo.controllers.Path;
 import com.example.demo.controllers.RedirectType;
 import com.example.demo.controllers.ServletResponse;
+import com.example.demo.db.DBManager;
 import com.example.demo.db.Role;
 import com.example.demo.db.bean.UsersBean;
 import com.example.demo.db.dao.UserDAO;
@@ -14,6 +15,9 @@ import org.apache.log4j.Logger;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
+import java.io.IOException;
+import java.sql.Connection;
+import java.sql.SQLException;
 import java.util.List;
 
 public class UserService implements ServiceEntity<User> {
@@ -23,30 +27,82 @@ public class UserService implements ServiceEntity<User> {
 
     @Override
     public List<User> findAll() {
-        return userDAO.findAll();
+        List<User> userList = null;
+
+        try {
+            userList = userDAO.findAll(DBManager.getInstance().getConnection());
+        } catch (SQLException exception) {
+            logger.error(exception);
+        }
+
+        return userList;
     }
 
     @Override
     public User findById(Long id) {
-        return userDAO.findUser(id);
+        Connection connection = null;
+        User user = null;
+        try {
+            connection = DBManager.getInstance().getConnection();
+            user = userDAO.findUser(id, connection);
+        } catch (SQLException exception) {
+            logger.error(exception);
+        }
+
+        return user;
     }
 
     @Override
     public boolean insert(User attr) {
-        return userDAO.insertUser(attr);
+        Connection connection = null;
+        try {
+            connection = DBManager.getInstance().getConnection();
+            userDAO.insertUser(attr, connection);
+        } catch (SQLException | IOException exception) {
+            DBManager.getInstance().rollbackAndClose(connection);
+            logger.error(exception);
+        }finally {
+            DBManager.getInstance().commitAndClose(connection);
+        }
+
+        return true;
     }
 
     @Override
     public boolean update(User attr) {
-        return userDAO.updateUser(attr);
+        try {
+            userDAO.updateUser(attr, DBManager.getInstance().getConnection());
+        } catch (SQLException | IOException exception) {
+            logger.error(exception);
+
+            return false;
+        }
+
+        return true;
     }
 
     public User findByEmail(String email){
-        return userDAO.findUser(email);
+        User user = null;
+
+        try {
+            user = userDAO.findUser(email, DBManager.getInstance().getConnection());
+        } catch (SQLException exception) {
+            logger.error(exception);
+        }
+
+        return user;
     }
 
     public List<UsersBean> findUsersBean(){
-        return userDAO.findUsersBean();
+        List<UsersBean> list = null;
+
+        try {
+            list = userDAO.findUsersBean(DBManager.getInstance().getConnection());
+        } catch (SQLException exception) {
+            logger.error(exception);
+        }
+
+        return list;
     }
 
     public ServletResponse logout(HttpServletRequest request){

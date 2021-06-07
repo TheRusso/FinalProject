@@ -1,6 +1,5 @@
 package com.example.demo.db.dao;
 
-import com.example.demo.db.DBManager;
 import com.example.demo.db.EntityMapper;
 import com.example.demo.db.Fields;
 import com.example.demo.db.bean.UsersBean;
@@ -22,15 +21,11 @@ public class UserDAO {
      * @param user
      *          User entity
      */
-    public boolean insertUser(User user){
-        Connection connection = null;
-        PreparedStatement preparedStatement = null;
-        try{
-            connection = DBManager.getInstance().getConnection();
-            preparedStatement = connection.prepareStatement(DBHandlerUtil.getInstance().getSQL(SQLProperyNamesHandler.USER_INSERT.getPropertyName()));
+    public void insertUser(User user, Connection connection) throws SQLException, IOException {
 
-            System.out.println(connection);
-
+        try(PreparedStatement preparedStatement =
+                connection.prepareStatement(DBHandlerUtil.getInstance()
+                        .getSQL(SQLProperyNamesHandler.USER_INSERT.getPropertyName()))){
             int k = 1;
             preparedStatement.setString(k++, user.getFirst_name());
             preparedStatement.setString(k++, user.getSecond_name());
@@ -40,14 +35,30 @@ public class UserDAO {
             preparedStatement.setString(k++, user.getEmail());
             preparedStatement.setString(k, user.getPass());
             preparedStatement.executeUpdate();
-
-        } catch (SQLException | IOException exception) {
-            DBManager.getInstance().rollbackAndClose(connection);
-            exception.printStackTrace();
-            return false;
-        }finally {
-            DBManager.getInstance().commitAndClose(connection);
         }
+    }
+
+    /**
+     * Deletes user with given email
+     *
+     * @param email
+     * @param connection
+     *          DB connection
+     * @return is Deleted
+     */
+    public boolean deleteUserWithEmail(String email, Connection connection){
+        try (PreparedStatement preparedStatement =
+                      connection.prepareStatement(DBHandlerUtil.getInstance().getSQL(SQLProperyNamesHandler.USER_DELETE.getPropertyName()))){
+
+            preparedStatement.setString(1, email);
+
+            preparedStatement.executeUpdate();
+        } catch (SQLException | IOException exception) {
+            logger.error(exception);
+
+            return false;
+        }
+
         return true;
     }
 
@@ -60,25 +71,25 @@ public class UserDAO {
      * @return User entity
      *
      */
-    public User findUser(Long id){
+    public User findUser(Long id, Connection connection){
         User user = null;
-        PreparedStatement preparedStatement = null;
         ResultSet rs = null;
-        Connection connection = null;
 
-        try{
-            connection = DBManager.getInstance().getConnection();
+        try(PreparedStatement preparedStatement =
+                    connection.prepareStatement(
+                            DBHandlerUtil.getInstance().getSQL(
+                                    SQLProperyNamesHandler.USER_FIND_BY_ID.getPropertyName()))){
             UserMapper mapper = new UserMapper();
-            preparedStatement = connection.prepareStatement(DBHandlerUtil.getInstance().getSQL(SQLProperyNamesHandler.USER_FIND_BY_ID.getPropertyName()));
+
             preparedStatement.setLong(1, id);
             rs = preparedStatement.executeQuery();
             if(rs.next())
                 user = mapper.mapRow(rs);
             rs.close();
-            preparedStatement.close();
         } catch (SQLException | IOException exception) {
-            exception.printStackTrace();
+            logger.error(exception);
         }
+
         return user;
     }
 
@@ -87,17 +98,13 @@ public class UserDAO {
      *
      * @return List of user entities
      */
-    public List<User> findAll(){
+    public List<User> findAll(Connection connection){
         List<User> list = new ArrayList<>();
-        Statement statement = null;
         ResultSet rs = null;
-        Connection connection = null;
 
         try{
-            connection = DBManager.getInstance().getConnection();
+            Statement statement = connection.createStatement();
             UserMapper mapper = new UserMapper();
-
-            statement = connection.createStatement();
 
             rs = statement.executeQuery(DBHandlerUtil.getInstance().getSQL(SQLProperyNamesHandler.USER_FIND_ALL.getPropertyName()));
 
@@ -105,8 +112,9 @@ public class UserDAO {
                 list.add(mapper.mapRow(rs));
 
         } catch (SQLException | IOException exception) {
-            exception.printStackTrace();
+            logger.error(exception);
         }
+
         return list;
     }
 
@@ -117,14 +125,10 @@ public class UserDAO {
      *
      * @return List of UsersBean
      */
-    public List<UsersBean> findUsersBean(){
-        Connection connection = null;
-        Statement statement = null;
+    public List<UsersBean> findUsersBean(Connection connection){
         ResultSet resultSet = null;
         List<UsersBean> beanList = new ArrayList<>();
-        try{
-            connection = DBManager.getInstance().getConnection();
-            statement = connection.createStatement();
+        try(Statement statement = connection.createStatement();){
 
             resultSet = statement.executeQuery(DBHandlerUtil.getInstance().getSQL(SQLProperyNamesHandler.BEAN_ALL_USERS.getPropertyName()));
             UsersBeanMapper mapper = new UsersBeanMapper();
@@ -133,7 +137,6 @@ public class UserDAO {
                 beanList.add(mapper.mapRow(resultSet));
 
             connection.close();
-            statement.close();
         } catch (SQLException | IOException exception) {
             logger.warn(exception.getMessage());
         }
@@ -148,16 +151,12 @@ public class UserDAO {
      *
      * @return User entity
      */
-    public User findUser(String email){
+    public User findUser(String email, Connection connection){
         User user = null;
-        PreparedStatement preparedStatement = null;
         ResultSet rs = null;
-        Connection connection = null;
 
-        try{
-            connection = DBManager.getInstance().getConnection();
+        try(PreparedStatement preparedStatement = connection.prepareStatement(DBHandlerUtil.getInstance().getSQL(SQLProperyNamesHandler.USER_FIND_BY_EMAIL.getPropertyName()))){
             UserMapper mapper = new UserMapper();
-            preparedStatement = connection.prepareStatement(DBHandlerUtil.getInstance().getSQL(SQLProperyNamesHandler.USER_FIND_BY_EMAIL.getPropertyName()));
             preparedStatement.setString(1, email);
             rs = preparedStatement.executeQuery();
             if(rs.next())
@@ -172,54 +171,34 @@ public class UserDAO {
 
 
     /**
-     * User update
-     *
-     * @param user
-     *             Entity user to update
-     */
-
-    public boolean updateUser(User user){
-        Connection con = null;
-        try{
-            con = DBManager.getInstance().getConnection();
-            updateUser(con, user);
-        } catch (SQLException | IOException exception) {
-            DBManager.getInstance().rollbackAndClose(con);
-            exception.printStackTrace();
-            return false;
-        }finally {
-            DBManager.getInstance().commitAndClose(con);
-        }
-
-        return true;
-    }
-
-    /**
      * Update user
      *
-     * @param con
-     *           Database connection
      * @param user
      *           User entity
      *
+     * @param connection
+     *           Database connection
      * @throws SQLException
+     * @return
      */
-    public void updateUser(Connection con, User user) throws SQLException, IOException {
-        PreparedStatement preparedStatement = con.prepareStatement(DBHandlerUtil.getInstance().getSQL(SQLProperyNamesHandler.USER_UPDATE.getPropertyName()));
-        int k = 1;
-        preparedStatement.setString(k++, user.getPass());
-        preparedStatement.setString(k++, user.getFirst_name());
-        preparedStatement.setString(k++, user.getSecond_name());
-        preparedStatement.setString(k++, user.getEmail());
-        preparedStatement.setString(k++, user.getAddress());
-        preparedStatement.setString(k++, user.getCity());
-        preparedStatement.setInt(k++, user.getCountry_id());
-        preparedStatement.setInt(k++, user.getRoleId());
-        preparedStatement.setInt(k++, user.getBanned());
-        preparedStatement.setLong(k, user.getId());
-        preparedStatement.executeUpdate();
-
-        preparedStatement.close();
+    public void updateUser(User user, Connection connection) throws SQLException, IOException {
+        try(PreparedStatement preparedStatement =
+                    connection.prepareStatement(
+                            DBHandlerUtil.getInstance().getSQL(
+                                    SQLProperyNamesHandler.USER_UPDATE.getPropertyName()))){
+            int k = 1;
+            preparedStatement.setString(k++, user.getPass());
+            preparedStatement.setString(k++, user.getFirst_name());
+            preparedStatement.setString(k++, user.getSecond_name());
+            preparedStatement.setString(k++, user.getEmail());
+            preparedStatement.setString(k++, user.getAddress());
+            preparedStatement.setString(k++, user.getCity());
+            preparedStatement.setInt(k++, user.getCountry_id());
+            preparedStatement.setInt(k++, user.getRoleId());
+            preparedStatement.setInt(k++, user.getBanned());
+            preparedStatement.setLong(k, user.getId());
+            preparedStatement.executeUpdate();
+        }
     }
 
 

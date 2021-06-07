@@ -29,7 +29,7 @@ public class EditItemCommand extends Command {
 
         logger.info("Item: " + item);
 
-        logger.info("Is added: " + new ItemDAO().updateItem(item));
+        logger.info("Is added: " + new ItemService().update(item));
 
         return new ServletResponse(Path.SHOP_PAGE_URL.getValue(), RedirectType.REDIRECT);
     }

@@ -1,6 +1,8 @@
 package com.example.demo.db.entities;
 
-public class User extends Entity{
+import java.util.Objects;
+
+public class User extends Entity implements Cloneable{
     private String first_name;
     private String second_name;
     private String address;
@@ -10,6 +12,65 @@ public class User extends Entity{
     private String pass;
     private int roleId;
     private int banned;
+
+    public static class Builder{
+        private User user;
+
+        public Builder() {
+            user = new User();
+        }
+
+        public Builder withFirstName(String str){
+            user.setFirst_name(str);
+            return this;
+        }
+
+        public Builder withSecondName(String str){
+            user.setSecond_name(str);
+            return this;
+        }
+
+        public Builder withCity(String str){
+            user.setCity(str);
+            return this;
+        }
+
+        public Builder withAddress(String str){
+            user.setAddress(str);
+            return this;
+        }
+
+
+        public Builder withEmail(String str){
+            user.setEmail(str);
+            return this;
+        }
+
+
+        public Builder withPass(String str){
+            user.setPass(str);
+            return this;
+        }
+
+        public Builder withCountyId(int id){
+            user.setCountry_id(id);
+            return this;
+        }
+
+        public Builder withRoleId(int id){
+            user.setRoleId(id);
+            return this;
+        }
+
+        public Builder withIsBanned(int id){
+            user.setBanned(id);
+            return this;
+        }
+
+        public User build(){
+            return user;
+        }
+    }
 
     public int getBanned() {
         return banned;
@@ -96,5 +157,23 @@ public class User extends Entity{
                 ", roleId=" + roleId +
                 ", banned=" + banned +
                 '}';
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        User user = (User) o;
+        return country_id == user.country_id && roleId == user.roleId && banned == user.banned && first_name.equals(user.first_name) && second_name.equals(user.second_name) && Objects.equals(address, user.address) && Objects.equals(city, user.city) && email.equals(user.email) && pass.equals(user.pass);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(first_name, second_name, address, city, country_id, email, pass, roleId, banned);
+    }
+
+    @Override
+    public Object clone() throws CloneNotSupportedException {
+        return super.clone();
     }
 }

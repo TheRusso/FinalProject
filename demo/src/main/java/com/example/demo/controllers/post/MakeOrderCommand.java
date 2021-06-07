@@ -27,8 +27,6 @@ public class MakeOrderCommand extends Command {
                 .withUserId(user.getId())
                 .withCity(request.getParameter("city"))
                 .withCountryId(Long.parseLong(request.getParameter("country_id")))
-                .withFirstName(request.getParameter("first_name"))
-                .withSecondName(request.getParameter("second_name"))
                 .withAddress(request.getParameter("address"))
                 .withDeliveryTypeId(Long.parseLong(request.getParameter("delivery_type_id")))
                 .withStatusId(Status.REGISTERED.getId())

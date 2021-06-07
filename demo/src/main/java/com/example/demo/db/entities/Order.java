@@ -2,10 +2,9 @@ package com.example.demo.db.entities;
 
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Objects;
 
 public class Order extends Entity{
-    private String firstName;
-    private String lastName;
     private Long user_id;
     private String address;
     private String city;
@@ -22,15 +21,6 @@ public class Order extends Entity{
             order = new Order();
         }
 
-        public Builder withFirstName(String name){
-            order.setFirstName(name);
-            return this;
-        }
-
-        public Builder withSecondName(String name){
-            order.setLastName(name);
-            return this;
-        }
 
         public Builder withUserId(Long id){
             order.setUser_id(id);
@@ -67,21 +57,6 @@ public class Order extends Entity{
         }
     }
 
-    public String getFirstName() {
-        return firstName;
-    }
-
-    public void setFirstName(String firstName) {
-        this.firstName = firstName;
-    }
-
-    public String getLastName() {
-        return lastName;
-    }
-
-    public void setLastName(String lastName) {
-        this.lastName = lastName;
-    }
 
     public Map<Long, Integer> getItems() {
         return items;
@@ -142,9 +117,7 @@ public class Order extends Entity{
     @Override
     public String toString() {
         return "Order{" +
-                "firstName='" + firstName + '\'' +
-                ", lastName='" + lastName + '\'' +
-                ", user_id=" + user_id +
+                "user_id=" + user_id +
                 ", address='" + address + '\'' +
                 ", city='" + city + '\'' +
                 ", country_id=" + country_id +
@@ -152,5 +125,18 @@ public class Order extends Entity{
                 ", status_id=" + status_id +
                 ", items=" + items +
                 '}';
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Order order = (Order) o;
+        return status_id == order.status_id && Objects.equals(user_id, order.user_id) && Objects.equals(address, order.address) && Objects.equals(city, order.city) && Objects.equals(country_id, order.country_id) && Objects.equals(delivery_type_id, order.delivery_type_id) && Objects.equals(items, order.items);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(user_id, address, city, country_id, delivery_type_id, status_id, items);
     }
 }
