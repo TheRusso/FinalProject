@@ -28,6 +28,15 @@
     </context-param>
 
 
+
+    <jsp-config>
+        <taglib>
+            <taglib-uri>custom</taglib-uri>
+            <taglib-location>/WEB-INF/MyTagDescription.tld</taglib-location>
+        </taglib>
+    </jsp-config>
+
+
     <servlet>
         <servlet-name>Controller</servlet-name>
         <servlet-class>com.example.demo.controllers.Controller</servlet-class>
@@ -37,14 +46,14 @@
         <url-pattern>/view/*</url-pattern>
     </servlet-mapping>
 
-<!--    <error-page>-->
-<!--        <location>/pages/error_page.jsp</location>-->
-<!--    </error-page>-->
+    <error-page>
+        <location>/pages/error_page.jsp</location>
+    </error-page>
 
-<!--    <error-page>-->
-<!--        <error-code>404</error-code>-->
-<!--        <location>/pages/errors/404.jsp</location>-->
-<!--    </error-page>-->
+    <error-page>
+        <error-code>404</error-code>
+        <location>/pages/errors/404.jsp</location>
+    </error-page>
 
 
     <filter>
@@ -86,5 +95,6 @@
         <filter-name>PostMethodFilter</filter-name>
         <url-pattern>/view/insert_user</url-pattern>
     </filter-mapping>
+
 
 </web-app>

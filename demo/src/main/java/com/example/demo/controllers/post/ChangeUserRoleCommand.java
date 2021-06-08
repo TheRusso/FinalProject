@@ -29,6 +29,7 @@ public class ChangeUserRoleCommand extends Command {
 
         userService.update(user);
 
+        logger.info(user);
         return null;
     }
 }

@@ -29,10 +29,15 @@ public class UserService implements ServiceEntity<User> {
     public List<User> findAll() {
         List<User> userList = null;
 
+        Connection connection = null;
+
         try {
-            userList = userDAO.findAll(DBManager.getInstance().getConnection());
+            connection = DBManager.getInstance().getConnection();
+            userList = userDAO.findAll(connection);
         } catch (SQLException exception) {
             logger.error(exception);
+        }finally {
+            DBManager.getInstance().commitAndClose(connection);
         }
 
         return userList;
@@ -42,11 +47,15 @@ public class UserService implements ServiceEntity<User> {
     public User findById(Long id) {
         Connection connection = null;
         User user = null;
+
         try {
             connection = DBManager.getInstance().getConnection();
             user = userDAO.findUser(id, connection);
         } catch (SQLException exception) {
             logger.error(exception);
+            DBManager.getInstance().rollbackAndClose(connection);
+        }finally {
+            DBManager.getInstance().commitAndClose(connection);
         }
 
         return user;
@@ -70,12 +79,16 @@ public class UserService implements ServiceEntity<User> {
 
     @Override
     public boolean update(User attr) {
+        Connection connection = null;
         try {
-            userDAO.updateUser(attr, DBManager.getInstance().getConnection());
+            connection= DBManager.getInstance().getConnection();
+            userDAO.updateUser(attr, connection);
         } catch (SQLException | IOException exception) {
             logger.error(exception);
-
+            DBManager.getInstance().rollbackAndClose(connection);
             return false;
+        }finally {
+            DBManager.getInstance().commitAndClose(connection);
         }
 
         return true;
@@ -84,10 +97,16 @@ public class UserService implements ServiceEntity<User> {
     public User findByEmail(String email){
         User user = null;
 
+        Connection connection = null;
+
         try {
-            user = userDAO.findUser(email, DBManager.getInstance().getConnection());
+            connection = DBManager.getInstance().getConnection();
+            user = userDAO.findUser(email, connection);
         } catch (SQLException exception) {
             logger.error(exception);
+            DBManager.getInstance().rollbackAndClose(connection);
+        }finally {
+            DBManager.getInstance().commitAndClose(connection);
         }
 
         return user;
@@ -200,11 +219,11 @@ public class UserService implements ServiceEntity<User> {
                 .withRedirect(RedirectType.REDIRECT)
                 .build();
 
-        boolean isRegistered = new UserService().insert(user);
+        boolean isRegistered = insert(user);
 
         if(isRegistered){
 
-            setUserInSession(user, Role.CLIENT, request.getSession());
+            setUserInSession(findByEmail(user.getEmail()), Role.CLIENT, request.getSession());
 
             logger.info("The user have been registered");
 

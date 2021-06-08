@@ -26,7 +26,6 @@ public class Fields {
     public static final String ITEM_TITLE = "title";
     public static final String ITEM_DESCRIPTION = "description";
     public static final String ITEM_PRICE = "price";
-    public static final String ITEM_COUNT = "count";
     public static final String ITEM_IMG = "img";
     public static final String ITEM_DISABLE = "disable";
 

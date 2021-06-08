@@ -20,8 +20,6 @@ public class OrderDAO {
 
     private Logger logger = Logger.getLogger(OrderDAO.class.getName());
 
-
-
     /**
      * Returns order by id
      *
@@ -42,7 +40,6 @@ public class OrderDAO {
             if(resultSet.next())
                 order = new OrderMapper().mapRow(resultSet);
 
-            preparedStatement.close();
         } catch (SQLException | IOException exception) {
             logger.warn(exception.getMessage());
         }finally {
@@ -156,7 +153,6 @@ public class OrderDAO {
             logger.info("Concatenated user Bean: " + userOrderBeanList);
 
             connection.close();
-            statement.close();
         } catch (SQLException | IOException exception) {
             exception.printStackTrace();
         }
@@ -286,7 +282,7 @@ public class OrderDAO {
                     id = generatedKeys.getLong(1);
             }
 
-            DBManager.getInstance().commitAndClose(connection);
+            connection.commit();
         } catch (SQLException | IOException exception) {
             logger.warn(exception.getMessage());
         }
@@ -305,6 +301,7 @@ public class OrderDAO {
         ResultSet rs = null;
         try {
             OrderMapper mapper = new OrderMapper();
+            stmt = connection.createStatement();
             rs = stmt.executeQuery(DBHandlerUtil.getInstance().getSQL(SQLProperyNamesHandler.SQL__ORDER_FIND_ALL.getPropertyName()));
             while (rs.next())
                 ordersList.add(mapper.mapRow(rs));

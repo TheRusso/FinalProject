@@ -91,11 +91,6 @@ public class OrderDAOTest {
         orderDAO.updateStatus(order, 2, DBMock.getInstance().getConnection());
     }
 
-    @Test
-    public void findBeanForUser() throws SQLException {
-        System.out.println(new OrderDAO().findBeanAllOrders(DBMock.getInstance().getConnection()));
-    }
-
     @AfterClass
     public static void tearDown(){
         DBMock.dropMockDataBase();

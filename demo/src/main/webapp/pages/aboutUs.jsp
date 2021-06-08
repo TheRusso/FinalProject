@@ -1,3 +1,4 @@
+<%@ taglib prefix="date" uri="http://mycompany.com" %>
 <%@ page pageEncoding="UTF-8"%>
 <%@ include file="/jspf/page.jsp" %>
 <%@ include file="/jspf/taglib.jsp"%>

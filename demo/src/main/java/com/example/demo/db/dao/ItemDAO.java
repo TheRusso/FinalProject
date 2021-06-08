@@ -34,14 +34,12 @@ public class ItemDAO {
                     connection.prepareStatement(
                             DBHandlerUtil.getInstance().getSQL(
                                     SQLProperyNamesHandler.ITEM_INSERT.getPropertyName()))){
-            connection = DBManager.getInstance().getConnection();
 
             preparedStatement.setString(1, item.getTitle());
             preparedStatement.setString(2, item.getDescription());
             preparedStatement.setDouble(3, item.getPrice());
-            preparedStatement.setDouble(4, item.getCount());
-            preparedStatement.setLong(5, item.getCategory_id());
-            preparedStatement.setString(6, item.getImg());
+            preparedStatement.setLong(4, item.getCategory_id());
+            preparedStatement.setString(5, item.getImg());
 
             preparedStatement.executeUpdate();
 
@@ -333,7 +331,6 @@ public class ItemDAO {
                 item.setTitle(rs.getString(Fields.ITEM_TITLE));
                 item.setDescription(rs.getString(Fields.ITEM_DESCRIPTION));
                 item.setPrice(rs.getFloat(Fields.ITEM_PRICE));
-                item.setImg(rs.getString(Fields.ITEM_IMG));
                 item.setImg(rs.getString(Fields.ITEM_IMG));
                 item.setDisable(rs.getInt(Fields.ITEM_DISABLE));
                 return item;

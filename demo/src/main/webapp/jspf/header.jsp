@@ -42,7 +42,7 @@
 
                         <c:if test="${sessionScope.user.roleId == 0}">
                             <li class="nav-item">
-                                <a href="${pageContext.request.contextPath}/view/admin">Admin</a>
+                                <a href="${pageContext.request.contextPath}/view/admin"><fmt:message key="header.admin"/></a>
                             </li>
                         </c:if>
 

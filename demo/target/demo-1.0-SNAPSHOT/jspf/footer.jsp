@@ -1,3 +1,4 @@
+<%@ taglib prefix="date" uri="http://mycompany.com" %>
 <div id="footer" class="container block" style="margin-bottom: 30px">
     <div class="container">
         <img src="<c:url value="/pages/motanka/img/separate_line.png" /> " alt="" class="img-fluid d-block mx-auto">
@@ -12,20 +13,18 @@
         </div>
     </div>
     <p class="text-center" style="margin: 20px 0 0 0;">
-        2020 Directed by The Russo
+        <date:showDate lang="${sessionScope.lang}"/> Directed by The Russo
     </p>
 
     <ul style="position: relative; bottom: 70px;">
         <li>
-            <form action="view" method="post">
-                <input type="hidden" name="command" value="change_lang">
+            <form action="/view/change_lang" method="post">
                 <input type="hidden" name="lang" value="ru">
                 <input type="submit" value="ru" class="text_from_input">
             </form>
         </li>
         <li>
-            <form action="view" method="post">
-                <input type="hidden" name="command" value="change_lang">
+            <form action="/view/change_lang" method="post">
                 <input type="hidden" name="lang" value="en">
                 <input type="submit" value="en" class="text_from_input">
             </form>
